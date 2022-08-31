@@ -1,9 +1,7 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
-# NOTE: This file runs on Python 2.x and 3.x with only the stdlib.
-# That is on purpose. In practice, that means only basic imports, no pathlib,
-# no type annotations, and so on.
-
+# NOTE: This file runs on Python 3.x with only the stdlib.
+# That is on purpose. In practice, that means only basic imports
 import logging
 import os
 import sys
