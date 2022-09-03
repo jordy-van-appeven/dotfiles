@@ -378,36 +378,23 @@
       </action>
     </keybind>
     <!--  Lubuntu specific : Keybindings -->
-    <!-- Keybindings for running applications on Home + E -->
     <keybind key="W-e">
       <action name="Execute">
         <startupnotify>
           <enabled>true</enabled>
           <name>File manager</name>
         </startupnotify>
-        <command>lxsession-default file_manager</command>
+        <command>nautilus</command>
       </action>
     </keybind>
-    <!-- Keybindings for running Run menu from Lxpanel on Home + R-->
-    <keybind key="W-r">
+    <keybind key="C-A-b">
       <action name="Execute">
-        <command>lxsession-default launcher</command>
+        <command>chromium</command>
       </action>
     </keybind>
-    <keybind key="A-F2">
+    <keybind key="C-A-t">
       <action name="Execute">
-        <command>lxsession-default launcher</command>
-      </action>
-    </keybind>
-    <!-- Keybindings for running Menu from Lxpanel -->
-    <keybind key="A-F1">
-      <action name="Execute">
-        <command>lxpanelctl menu</command>
-      </action>
-    </keybind>
-    <keybind key="C-Escape">
-      <action name="Execute">
-        <command>lxpanelctl menu</command>
+        <command>terminator</command>
       </action>
     </keybind>
     <!-- Keybindings to toggle fullscreen -->
