@@ -144,6 +144,7 @@ colors = [["#292d3e", "#292d3e"],  # Panel background
           ["#AD343E", "#AD343E"],  # end colormap, red
           ]
 
+widget_default = {"padding": 0}
 screens = [
     Screen(
         bottom=bar.Bar(
@@ -206,24 +207,24 @@ screens = [
                 widget.WindowName(
                     foreground=colors[2],
                     background=colors[0],
-                    padding=0
+                    **widget_default
                 ),
                 widget.Systray(
                     background=colors[0],
                     padding=5
                 ),
                 widget.TextBox(
-                    text='\uF0D9',                    
+                    text='',                    
                     foreground=colors[2],
                     background=colors[0],
-                    padding=0,
+                    **widget_default,
                     fontsize=45
                 ),
                 widget.TextBox(
                     text="",
                     foreground=colors[7],
                     background=colors[2],
-                    padding=0,
+                    **widget_default,
                     fontsize=16
                 ),
                 widget.CPU(                    
@@ -235,17 +236,17 @@ screens = [
                     padding=5,
                 ),
                 widget.TextBox(
-                    text='\uF0D9',                    
+                    text='',                    
                     foreground=colors[4],
                     background=colors[2],
-                    padding=0,
+                    **widget_default,
                     fontsize=45
                 ),
                 widget.TextBox(
                     text="",
                     foreground=colors[7],
                     background=colors[4],
-                    padding=0,
+                    **widget_default,
                     fontsize=16
                 ),
                 widget.Memory(
@@ -256,17 +257,17 @@ screens = [
                     padding=5
                 ),
                 widget.TextBox(
-                    text='\uF0D9',                    
+                    text='',                    
                     foreground=colors[2],
                     background=colors[4],
-                    padding=0,
+                    **widget_default,
                     fontsize=45
                 ),
                 widget.TextBox(
                     text="直",
                     foreground=colors[7],
                     background=colors[2],
-                    padding=0,
+                    **widget_default,
                     fontsize=16
                 ),
                 widget.Net(
@@ -276,17 +277,17 @@ screens = [
                     format="{down}↓↑{up}",
                 ),
                 widget.TextBox(
-                    text='\uF0D9',
+                    text='',
                     foreground=colors[4],
                     background=colors[2],
-                    padding=0,
+                    **widget_default,
                     fontsize=37
                 ),
                 widget.TextBox(
-                    text=" \uF028 ",
+                    text="墳",
                     foreground=colors[7],
                     background=colors[4],
-                    padding=0,
+                    **widget_default,
                     mouse_callbacks={
                         "Button1": lazy.spawn("pavucontrol")},
                     fontsize=16
@@ -298,10 +299,10 @@ screens = [
                     limit_max_volume=True,
                 ),
                 widget.TextBox(
-                    text='\uF0D9',
+                    text='',
                     foreground=colors[2],
                     background=colors[4],                    
-                    padding=0,
+                    **widget_default,
                     fontsize=37
                 ),
                 widget.Battery(
@@ -318,14 +319,14 @@ screens = [
                     text='',
                     foreground=colors[4],
                     background=colors[2],
-                    padding=0,
-                    fontsize=37
+                    **widget_default,
+                    fontsize=42
                 ),
                 widget.TextBox(
-                    text=' ',
+                    text='',
                     foreground=colors[7],
                     background=colors[4],
-                    padding=0,
+                    **widget_default,
                     fontsize=16
                 ),
                 widget.Clock(
@@ -339,7 +340,7 @@ screens = [
                     custom_icon_paths=[os.path.dirname(__file__) + "/icons"],
                     foreground=colors[0],
                     background=colors[4],
-                    padding=0,
+                    **widget_default,
                     scale=.7
                 ),
                 widget.Sep(
