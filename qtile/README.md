@@ -3,10 +3,15 @@
 ## Install
 Follow instructions from http://docs.qtile.org/en/latest/manual/install/ to install Qtile.
 
+Install depencendies,
+```shell
+$ sudo apt install suckless-tools 
+$ sudo apt install fonts-font-awesome # Note, appears needed for proper font display
+```
+
 Additionally, download `Ubuntu Nerd Font` from http://nerdfonts.com/font-downloads. Then install fonts by extracting to `~/.fonts` and rebuild font cache.
 
 ```shell
-$ sudo apt install fonts-font-awesome # Note, appears needed for proper font display
 $ unzip Ubuntu.zip -d ~/.fonts
 $ fc-cache -fv
 ```

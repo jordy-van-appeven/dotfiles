@@ -3,7 +3,7 @@
 
 import os
 import subprocess
-from libqtile import bar, layout, widget, hook
+from libqtile import bar, extension, hook, layout, widget
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
@@ -13,19 +13,47 @@ alt = "mod1"
 # tab = "mod3"
 terminal = guess_terminal()
 
+colors = [["#292d3e", "#292d3e"],  # Panel background
+          ["#434758", "#434758"],  # Promp background
+          ["#78aedd", "#78aedd"],  # Alternate powerline
+          ["#bc13fe", "#bc13fe"],  # Prompt foreground
+          ["#8d62a9", "#8d62a9"],  # This screen group border
+          #   ["#e1acff", "#e1acff"],  # window name
+          ["#f1ffff", "#f1ffff"],  # Group up
+          ["#4c566a", "#4c566a"],  # Group down
+          ["#000000", "#000000"],          
+          ["#04adff", "#04adff"],  # begin colormap
+          ["#AFE1AF", "#AFE1AF"],
+          ["#039c4b", "#039c4b"],
+          ["#F7DC6F", "#F7DC6F"],
+          ["#F39C12", "#F39C12"],
+          ["#f76e5c", "#f76e5c"],
+          ["#AD343E", "#AD343E"],  # end colormap, red
+          ]
+dmenu_extension = lazy.run_extension(extension.J4DmenuDesktop(
+        background=colors[0][0],
+        # foreground=colors[2][0],
+        selected_background=colors[4][0],
+        # selected_foreground=colors[2][0],
+        dmenu_bottom=True,
+        dmenu_ignorecase=True,
+        dmenu_prompt=">",
+        # dmenu_height=24,
+    ))
+
 keys = [
     # Switch between windows
     Key([mod, "control"], "h", lazy.layout.left()),
     Key([mod, "control"], "l", lazy.layout.right()),
     Key([mod, "control"], "j", lazy.layout.down()),
     Key([mod, "control"], "k", lazy.layout.up()),
-    Key([mod, "control"], "space", lazy.layout.next()),        
+    Key([mod, "control"], "space", lazy.layout.next()),
     # Move windows between left/right columns or move up/down in current stack.
     # Moving out of range in Columns layout will create new column.
-    Key([mod,"control", "shift"], "h", lazy.layout.shuffle_left(),),
-    Key([mod,"control", "shift"], "l", lazy.layout.shuffle_right()),
-    Key([mod,"control", "shift"], "j", lazy.layout.shuffle_down()),
-    Key([mod,"control", "shift"], "k", lazy.layout.shuffle_up()),
+    Key([mod, "control", "shift"], "h", lazy.layout.shuffle_left(),),
+    Key([mod, "control", "shift"], "l", lazy.layout.shuffle_right()),
+    Key([mod, "control", "shift"], "j", lazy.layout.shuffle_down()),
+    Key([mod, "control", "shift"], "k", lazy.layout.shuffle_up()),
     # Grow windows
     # Key([mod, "shift"], "h", lazy.layout.shrink()),
     # Key([mod, "shift"], "l", lazy.layout.grow()),
@@ -38,13 +66,14 @@ keys = [
     # Toggle between split and unsplit sides of stack.
     # Key([mod, "shift"], "space", lazy.layout.toggle_split()),
     # Toggle between different layouts as defined below
-    Key([mod, "shift"], "Tab", lazy.next_layout()),    
+    Key([mod, "shift"], "Tab", lazy.next_layout()),
     # Qtile
     Key([mod], "w", lazy.window.kill()),
     Key([mod, "control"], "r", lazy.reload_config()),
     Key([mod, "control"], "q", lazy.shutdown()),
-    # Applications
-    Key([mod], "r", lazy.spawncmd()),
+    # Applications    
+    Key([mod], "r", dmenu_extension()),
+    Key([mod, "control"], "w", lazy.run_extension(extension.WindowList())),
     Key([mod, "control"], "t", lazy.spawn(terminal)),
     Key([mod, "control"], "b", lazy.spawn("chromium")),
     Key([mod, "control"], "e", lazy.spawn("nautilus")),
@@ -126,55 +155,26 @@ layouts = [
     # layout.Zoomy(),
 ]
 
-colors = [["#292d3e", "#292d3e"],  # Panel background
-          ["#434758", "#434758"],  # Promp background
-          ["#78aedd", "#78aedd"],  # Alternate powerline
-          ["#bc13fe", "#bc13fe"],  # Prompt foreground
-          ["#8d62a9", "#8d62a9"],  # This screen group border
-          #   ["#e1acff", "#e1acff"],  # window name
-          ["#f1ffff", "#f1ffff"],  # Group up
-          ["#4c566a", "#4c566a"],  # Group down
-          ["#000000", "#000000"],          
-          ["#04adff", "#04adff"],  # begin colormap
-          ["#AFE1AF", "#AFE1AF"],
-          ["#039c4b", "#039c4b"],
-          ["#F7DC6F", "#F7DC6F"],
-          ["#F39C12", "#F39C12"],
-          ["#f76e5c", "#f76e5c"],
-          ["#AD343E", "#AD343E"],  # end colormap, red
-          ]
-
 widget_default = {"padding": 0}
 screens = [
     Screen(
         bottom=bar.Bar(
             [
-                widget.Sep(
-                    linewidth=0,
-                    padding=6,
-                    foreground=colors[0],
-                    background=colors[0]
-                ),
                 widget.Image(
                     filename="/usr/share/lxqt/graphics/helix_60.png",
                     background=colors[0],
+                    margin_x=6,
                     mouse_callbacks={
-                        'Button1': lazy.spawncmd()
+                        'Button1': dmenu_extension()
                     }
-                ),
-                widget.Sep(
-                    linewidth=0,
-                    padding=5,
-                    foreground=colors[0],
-                    background=colors[0]
-                ),
+                ),                
                 widget.GroupBox(
                     font="Ubuntu Bold",
                     fontsize=12,
                     margin_y=2,
                     margin_x=0,
                     padding_y=5,
-                    padding_x=3,
+                    padding_x=0,
                     borderwidth=3,
                     active=colors[5],
                     inactive=colors[6],
@@ -191,12 +191,20 @@ screens = [
                     disable_drag=True
                 ),
                 widget.Prompt(
-                    # prompt=lazy.spawncmd(),
+                    prompt=lazy.run_extension(extension.J4DmenuDesktop(
+        background=colors[0][0],
+        # foreground=colors[2][0],
+        selected_background=colors[4][0],
+        # selected_foreground=colors[2][0],
+        dmenu_bottom=True,
+        dmenu_ignorecase=True,
+        dmenu_prompt=">",
+    )),
                     # font="Ubuntu Mono",
                     padding=10,
                     foreground=colors[4],
                     background=colors[1],
-                    prompt="Run: ",
+                    # prompt="Run: ",
                 ),
                 widget.Sep(
                     linewidth=0,
@@ -214,7 +222,7 @@ screens = [
                     padding=5
                 ),
                 widget.TextBox(
-                    text='',                    
+                    text='',
                     foreground=colors[2],
                     background=colors[0],
                     **widget_default,
@@ -227,7 +235,7 @@ screens = [
                     **widget_default,
                     fontsize=16
                 ),
-                widget.CPU(                    
+                widget.CPU(
                     foreground=colors[0],
                     background=colors[2],
                     format="{freq_current}Ghz {load_percent}%",
@@ -236,7 +244,7 @@ screens = [
                     padding=5,
                 ),
                 widget.TextBox(
-                    text='',                    
+                    text='',
                     foreground=colors[4],
                     background=colors[2],
                     **widget_default,
@@ -257,7 +265,7 @@ screens = [
                     padding=5
                 ),
                 widget.TextBox(
-                    text='',                    
+                    text='',
                     foreground=colors[2],
                     background=colors[4],
                     **widget_default,
@@ -301,7 +309,7 @@ screens = [
                 widget.TextBox(
                     text='',
                     foreground=colors[2],
-                    background=colors[4],                    
+                    background=colors[4],
                     **widget_default,
                     fontsize=37
                 ),
