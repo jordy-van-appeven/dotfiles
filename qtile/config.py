@@ -276,13 +276,17 @@ screens = [
                     foreground=colors[7],
                     background=colors[2],
                     **widget_default,
-                    fontsize=16
+                    fontsize=16,
+                    mouse_callbacks={'Button1': lazy.spawn(
+                        'rofi-network-manager')},
                 ),
                 widget.Net(
                     foreground=colors[7],
                     background=colors[2],
                     prefix="M",
                     format="{down}↓↑{up}",
+                    mouse_callbacks={'Button1': lazy.spawn(
+                        'rofi-network-manager')},                                    
                 ),
                 widget.TextBox(
                     text='',
