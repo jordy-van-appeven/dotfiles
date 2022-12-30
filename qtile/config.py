@@ -4,7 +4,7 @@
 import os
 import subprocess
 from libqtile import bar, extension, hook, layout, widget
-from libqtile.config import Click, Drag, Group, Key, Match, Screen
+from libqtile.config import Click, Drag, DropDown, Group, Key, Match, ScratchPad, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 
@@ -112,7 +112,7 @@ for group in groups:
     )
 
 layout_default = {"border_width": 2, "margin": 0,
-                  "border_focus": "#668bd7", "border_normal": "1D2330"}
+                  "border_focus": colors[2], "border_normal": "#1D2330"}
 
 layouts = [
     # layout.Bsp(),
@@ -209,14 +209,21 @@ screens = [
                     background=colors[0],
                     **widget_default
                 ),
-                widget.Systray(
+                widget.TextBox(
+                    text='',
+                    foreground=colors[4],
                     background=colors[0],
-                    padding=5
+                    **widget_default,
+                    fontsize=45
+                ),
+                widget.Systray(                    
+                    background=colors[4],
+                    padding=0,                    
                 ),
                 widget.TextBox(
                     text='',
                     foreground=colors[2],
-                    background=colors[0],
+                    background=colors[4],
                     **widget_default,
                     fontsize=45
                 ),
@@ -368,12 +375,19 @@ mouse = [
     Click([mod], "Button2", lazy.window.bring_to_front()),
 ]
 
+groups.extend([ScratchPad("terminal", [
+    DropDown("terminal", terminal, x=0.0, y=0.65, width=0.998)])])
+
+keys.extend([Key([mod, "control"], "return", lazy.group["terminal"].dropdown_toggle("terminal")),
+])    
+
 dgroups_key_binder = None
 dgroups_app_rules = []  # type: list
 follow_mouse_focus = True
 bring_front_click = False
 cursor_warp = False
 floating_layout = layout.Floating(
+    **layout_default,
     float_rules=[
         # Run the utility of `xprop` to see the wm class and name of an X client.
         *layout.Floating.default_float_rules,
