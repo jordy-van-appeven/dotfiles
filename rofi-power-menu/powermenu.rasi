@@ -1,0 +1,33 @@
+configuration{
+	click-to-exit: false;
+}
+
+@theme "default_theme"
+
+window {
+	width: 9%;
+	x-offset: -1;
+	y-offset: -26;	
+	location: southeast;
+	anchor: southeast;	
+}
+
+inputbar {
+	enabled: false;
+}
+
+listview {				
+	scrollbar: false;
+	dynamic:		true;
+	fixed-height:	false;
+	border:			0;
+}
+
+element {		
+	
+	children: [ element-icon, element-text ];
+}
+
+element-icon{
+	padding: -6;
+}

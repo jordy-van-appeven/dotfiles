@@ -347,18 +347,15 @@ screens = [
                     #     "Button1": lambda qtile: qtile.cmd_spawn(PWA.calendar())},
                     format=" %a, %B %d - %H:%M ",
                 ),
-                widget.CurrentLayoutIcon(
-                    custom_icon_paths=[os.path.dirname(__file__) + "/icons"],
-                    foreground=colors[0],
+                widget.TextBox(
+                    text='',
+                    foreground=colors[7],
                     background=colors[4],
-                    **widget_default,
-                    scale=.7
-                ),
-                widget.Sep(
-                    linewidth=0,
-                    padding=2,
-                    foreground=colors[0],
-                    background=colors[4]
+                    mouse_callbacks={'Button1': lazy.spawn(
+                        "rofi -show powermenu -theme powermenu -modi powermenu:' \
+                            rofi-power-menu --choices=lockscreen/logout/suspend/reboot/shutdown'")},
+                    padding=6,
+                    fontsize=16,
                 ),
             ],
             size=24,
