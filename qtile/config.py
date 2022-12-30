@@ -30,16 +30,7 @@ colors = [["#292d3e", "#292d3e"],  # Panel background
           ["#f76e5c", "#f76e5c"],
           ["#AD343E", "#AD343E"],  # end colormap, red
           ]
-dmenu_extension = lazy.run_extension(extension.J4DmenuDesktop(
-        background=colors[0][0],
-        # foreground=colors[2][0],
-        selected_background=colors[4][0],
-        # selected_foreground=colors[2][0],
-        dmenu_bottom=True,
-        dmenu_ignorecase=True,
-        dmenu_prompt=">",
-        # dmenu_height=24,
-    ))
+rofi_cmd = lazy.spawn("rofi -show drun -display-drun '> '")
 
 keys = [
     # Switch between windows
@@ -72,7 +63,8 @@ keys = [
     Key([mod, "control"], "r", lazy.reload_config()),
     Key([mod, "control"], "q", lazy.shutdown()),
     # Applications    
-    Key([mod], "r", dmenu_extension()),
+    Key([mod], "r", lazy.spawn("rofi -show run -display-run '> '")),
+    Key([mod], "return", rofi_cmd()),
     Key([mod, "control"], "w", lazy.run_extension(extension.WindowList())),
     Key([mod, "control"], "t", lazy.spawn(terminal)),
     Key([mod, "control"], "b", lazy.spawn("chromium")),
@@ -165,7 +157,7 @@ screens = [
                     background=colors[0],
                     margin_x=6,
                     mouse_callbacks={
-                        'Button1': dmenu_extension()
+                        'Button1': rofi_cmd()
                     }
                 ),                
                 widget.GroupBox(

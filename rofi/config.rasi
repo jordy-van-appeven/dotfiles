@@ -1,0 +1,22 @@
+configuration {
+  modes: [ combi ];
+  combi-modes: [ window, drun, run ];
+}
+
+@theme "Arc-Dark"
+ 
+/* Insert theme modifications after this */
+
+inputbar {
+  children: [prompt,entry,overlay,case-indicator];
+}
+
+entry {
+    placeholder: " Type here";    
+}
+
+element {
+  orientation: horizontal;
+  children: [ element-icon, element-text ];
+  spacing: 5px;
+}
