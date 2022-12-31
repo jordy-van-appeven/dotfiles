@@ -1,10 +1,13 @@
 configuration {
   modes: [ combi ];
-  combi-modes: [ window, drun, run ];
+  combi-modes: [ window, drun, run ];  
+  hover-select: true;
+  me-select-entry: "";
+  me-accept-entry: [MousePrimary];
 }
-
-@theme "Arc-Dark"
  
+@theme "default_theme"
+
 /* Insert theme modifications after this */
 
 inputbar {
