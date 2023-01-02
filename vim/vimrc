@@ -63,3 +63,13 @@ set history=1000
 packadd! dracula
 syntax enable
 colorscheme dracula
+
+" Split behavior
+set splitbelow splitright
+
+" Remap split resize commands
+nnoremap <silent> <C-H> :vertical resize +3<CR>
+nnoremap <silent> <C-L> :vertical resize -3<CR>
+nnoremap <silent> <C-J> :resize -3<CR>
+nnoremap <silent> <C-K> :resize +3<CR>
+
