@@ -14,7 +14,7 @@ filetype indent on
 syntax on
 
 " Add numbers to each line on the left-hand side.
-set number
+set relativenumber
 
 " Set shift width to 4 spaces.
 set shiftwidth=4
@@ -58,3 +58,8 @@ set hlsearch
 
 " Set the commands to save in history default number is 20.
 set history=1000
+
+" Enable Dracula theme
+packadd! dracula
+syntax enable
+colorscheme dracula
