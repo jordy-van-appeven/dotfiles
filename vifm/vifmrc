@@ -498,3 +498,6 @@ nnoremap <c-u> <c-w>x
 "
 " let $VIFM_SERVER_NAME = v:servername
 
+" set dracula theme
+colorscheme dracula
+
