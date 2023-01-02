@@ -6,15 +6,16 @@
 $ git clone https://github.com/alacritty/alacritty.git
 ```
 
-Then follow manual build [instructions](https://github.com/alacritty/alacritty/blob/master/INSTALL.md#debianubuntu)
+Next, follow manual build [instructions](https://github.com/alacritty/alacritty/blob/master/INSTALL.md#debianubuntu)
 
-## Theme
+Then change the default terminal emulator
 
 ```shell
-$ mkdir -p ~/.config/alacritty
-
-$ wget https://raw.githubusercontent.com/alacritty/alacritty/master/alacritty.yml -O ~/.config/alacritty/alacritty.yml
+$ sudo update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator /usr/local/bin/alacritty 50
+$ sudo update-alternatives --config x-terminal-emulator
 ```
+
+## Theme
 
 Open `alacritty.yml`, add import tag and specify `yml` theme file.
 
