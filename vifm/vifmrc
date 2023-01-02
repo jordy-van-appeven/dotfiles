@@ -130,6 +130,16 @@ mark h ~/
 
 command! df df -h %m 2> /dev/null
 command! diff vim -d %f %F
+
+" https://github.com/vifm/vifm/issues/709#issuecomment-909201864
+command! zip if [ -n "%a" ]; then
+           \     zip -r '%a.zip' %f;
+           \ elseif [ "%c" = "%f" ]; then
+           \     zip -r %c.zip %c;
+           \ else
+           \     zip -r %d:t.zip %f;
+           \ fi
+
 command! zip zip -r %c.zip %f
 command! run !! ./%f
 command! make !!make %a
