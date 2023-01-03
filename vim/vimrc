@@ -90,3 +90,10 @@ let g:lightline = {
             \ 'colorscheme': 'dracula',
             \ }
 
+" vifm plugin
+command Fm :Vifm<CR>
+command Fmv :VsplitVifm<CR>
+command Fms :SplitVifm<CR>
+command Fmd :DiffVifm<CR>
+command Fmt :TabVifm<CR>
+
