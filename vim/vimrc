@@ -73,3 +73,13 @@ nnoremap <silent> <C-L> :vertical resize -3<CR>
 nnoremap <silent> <C-J> :resize -3<CR>
 nnoremap <silent> <C-K> :resize +3<CR>
 
+" Execute current file
+command Run call ExecuteFile()
+function! ExecuteFile()
+    w
+    silent !chmod +x %:p
+    silent !%:p 2>&1 | tee /tmp/vim_output
+    split /tmp/vim_output
+    redraw!
+endfunction
+
