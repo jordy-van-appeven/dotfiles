@@ -83,3 +83,10 @@ function! ExecuteFile()
     redraw!
 endfunction
 
+" lightline plugin
+set laststatus=2
+set noshowmode
+let g:lightline = {
+            \ 'colorscheme': 'dracula',
+            \ }
+
