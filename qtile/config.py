@@ -62,7 +62,8 @@ keys = [
     Key([mod], "w", lazy.window.kill()),
     Key([mod, "control"], "r", lazy.reload_config()),
     Key([mod, "control"], "q", lazy.shutdown()),
-    # Applications    
+    Key([mod, "control", "shift"], "return", lazy.spawn("virtual-monitor")),
+    # Applications
     Key([mod], "r", lazy.spawn("rofi -show run -display-run '> '")),
     Key([mod], "return", rofi_cmd()),
     Key([mod, "control"], "w", lazy.run_extension(extension.WindowList())),
