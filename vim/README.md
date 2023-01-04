@@ -8,7 +8,14 @@ $ sudo apt install vim-gtk
 
 ### Plugins
 
-#### Lightline
+#### fugitive
+```shell
+$ mkdir -p ~/.vim/pack/tpope/start
+$ git clone https://tpope.io/vim/fugitive.git ~/.vim/pack/tpope/start/fugitive
+$ vim -u NONE -c "helptags fugitive/doc" -c q
+```
+
+#### lightline
 ```shell
 $ git clone https://github.com/itchyny/lightline.vim ~/.vim/pack/plugins/start/lightline
 ```
