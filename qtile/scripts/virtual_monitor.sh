@@ -9,12 +9,12 @@ then
     echo "Please specify output device; e.g. \"`basename "$0"` $MONITOR\""
     MONITOR=$1
 else
-    MONITOR=$(xrandr --listactivemonitors | grep -m1 0 | grep -o "[^ ]*$")
+    MONITOR=$(xrandr --listactivemonitors | grep -P -m1 '0:' | grep -P -o '[^ ]*$')
 fi
 
 read WIDTH HEIGHT WIDTH_MM HEIGHT_MM <<< $(xdpyinfo |  
     grep dimensions |  
-    awk '{gsub("\(","");
+    awk '{gsub(/\(/,"");
         split($2,size,"x");
         split($4,size_mm,"x");
         print size[1] " " size[2] " " size_mm[1] " " size_mm[2]}')
@@ -28,7 +28,7 @@ read WIDTH HEIGHT WIDTH_MM HEIGHT_MM <<< $(xdpyinfo |
 
 if [ $? -eq 1 ]
 then
-    xrandr --delmonitor $MONITOR-1 --delmonitor $MONITOR-2 --delmonitor $MONITOR-3 --delmonitor $MONITOR-4 --output $MONITOR --scale 1.0
+    xrandr --delmonitor $MONITOR-1 --delmonitor $MONITOR-2 --delmonitor $MONITOR-3 --delmonitor $MONITOR-4 --output $MONITOR --scale 1.0x1.0
 fi
 
 qtile shell -c "reload_config()"
