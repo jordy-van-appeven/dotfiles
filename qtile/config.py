@@ -13,23 +13,9 @@ alt = "mod1"
 # tab = "mod3"
 terminal = guess_terminal()
 
-colors = [["#292d3e", "#292d3e"],  # Panel background
-          ["#434758", "#434758"],  # Promp background
-          ["#78aedd", "#78aedd"],  # Alternate powerline
-          ["#bc13fe", "#bc13fe"],  # Prompt foreground
-          ["#8d62a9", "#8d62a9"],  # This screen group border
-          #   ["#e1acff", "#e1acff"],  # window name
-          ["#f1ffff", "#f1ffff"],  # Group up
-          ["#4c566a", "#4c566a"],  # Group down
-          ["#000000", "#000000"],          
-          ["#04adff", "#04adff"],  # begin colormap
-          ["#AFE1AF", "#AFE1AF"],
-          ["#039c4b", "#039c4b"],
-          ["#F7DC6F", "#F7DC6F"],
-          ["#F39C12", "#F39C12"],
-          ["#f76e5c", "#f76e5c"],
-          ["#AD343E", "#AD343E"],  # end colormap, red
-          ]
+from theme import dracula
+theme = dracula
+
 rofi_cmd = lazy.spawn("rofi -show drun -display-drun '> '")
 
 keys = [
@@ -113,7 +99,7 @@ for group in groups:
     )
 
 layout_default = {"border_width": 2, "margin": 0,
-                  "border_focus": colors[2], "border_normal": "#1D2330"}
+                  "border_focus": theme["bar_background"], "border_normal": "#1D2330"}
 
 layouts = [
     # layout.Bsp(),
@@ -148,219 +134,167 @@ layouts = [
     # layout.Zoomy(),
 ]
 
-widget_default = {"padding": 0}
+widget_defaults = dict(
+    font='Ubuntu Nerd Font',
+    fontsize=14,
+    padding=4,
+    foreground=theme["bar_foreground"],
+    background=theme["bar_background"]
+)
+extension_defaults = widget_defaults.copy()
+
+
+def get_widgets(primary=False):
+    return [
+        widget.Image(
+            filename="/usr/share/lxqt/themes/Lubuntu Arc/mainmenu.svg",
+            background=theme["background"],
+            margin=2,
+            scale=True,
+            margin_x=5,            
+            mouse_callbacks={
+                'Button1': rofi_cmd()
+            }
+        ),
+        widget.GroupBox(
+            font="Ubuntu Nerd Font",
+            fontsize=14,
+            margin_y=4,
+            margin_x=0,
+            padding_y=5,
+            padding_x=4,
+            borderwidth=3,
+            active=theme["foreground"],
+            inactive=theme["inactive"],
+            rounded=True,
+            highlight_color=theme["bar_background"],
+            highlight_method='block',
+            urgent_alert_method='block',
+            this_current_screen_border=theme["bar_background"],
+            this_screen_border=theme["bar_background"],
+            other_current_screen_border=theme["background"],
+            other_screen_border=theme["background"],
+            foreground=theme["background"],
+            background=theme["background"],
+            disable_drag=True
+        ),
+        widget.Sep(
+            linewidth=0,
+            padding=40,
+            foreground=theme["background"],
+            background=theme["background"],
+        ),
+        widget.WindowName(
+            foreground=theme["bar_background"],
+            background=theme["background"],            
+        ),
+        widget.TextBox(
+            text=' ',
+            foreground=theme["bar_background"],
+            background=theme["background"],
+            fontsize=45,
+            padding=0,
+        ),
+        widget.Systray(
+            foreground=theme["bar_foreground"],
+            background=theme["bar_background"],
+        ) if primary else widget.Sep(foreground=theme["bar_foreground"], background=theme["bar_background"],),
+        widget.TextBox(
+            text=" ",
+            foreground=theme["bar_foreground"],
+            background=theme["bar_background"],
+            fontsize=17,
+        ),
+        widget.CPU(
+            foreground=theme["bar_foreground"],
+            background=theme["bar_background"],
+            format="{freq_current}Ghz {load_percent}%",
+            mouse_callbacks={'Button1': lazy.spawn(
+                terminal + ' -e htop')},
+        ),
+        widget.TextBox(
+            text=" ",
+            foreground=theme["bar_foreground"],
+            background=theme["bar_background"],
+            fontsize=17
+        ),
+        widget.Memory(
+            foreground=theme["bar_foreground"],
+            background=theme["bar_background"],
+            format='{MemUsed:.0f}{mm}/{MemTotal:.0f}{mm}',
+            mouse_callbacks={'Button1': lazy.spawn(
+                terminal + ' -e htop')},
+        ),
+        widget.TextBox(
+            text=" 直",
+            foreground=theme["bar_foreground"],
+            background=theme["bar_background"],
+            fontsize=17,
+            mouse_callbacks={'Button1': lazy.spawn(
+                'rofi-network-manager')},
+        ),
+        widget.Net(
+            foreground=theme["bar_foreground"],
+            background=theme["bar_background"],
+            prefix="M",
+            format="{down} ↓↑ {up}",
+            mouse_callbacks={'Button1': lazy.spawn(
+                'rofi-network-manager')},
+        ),
+        widget.TextBox(
+            text=" 墳",
+            foreground=theme["bar_foreground"],
+            background=theme["bar_background"],
+            mouse_callbacks={
+                "Button1": lazy.spawn("pavucontrol")},
+            fontsize=17,
+        ),
+        widget.PulseVolume(
+            foreground=theme["bar_foreground"],
+            background=theme["bar_background"],
+            limit_max_volume=True,
+            fmt="{}"
+        ),
+        widget.Battery(
+            foreground=theme["bar_foreground"],
+            background=theme["bar_background"],
+            charge_char="",
+            full_char="",
+            discharge_char="",
+            unknown_char="",
+            empty_char="",
+            format=" {char} {percent:2.0%} ",
+        ),
+        widget.Clock(
+            foreground=theme["bar_foreground"],
+            background=theme["bar_background"],
+            # mouse_callbacks={
+            #     "Button1": lambda qtile: qtile.cmd_spawn(PWA.calendar())},
+            format=" %a, %B %d |  %H:%M ",
+        ),
+        widget.TextBox(
+            text=' ',
+            foreground=theme["bar_foreground"],
+            background=theme["bar_background"],
+            mouse_callbacks={'Button1': lazy.spawn(
+                "rofi -show powermenu -theme powermenu -modi powermenu:' \
+                            rofi-power-menu --choices=lockscreen/logout/suspend/reboot/shutdown'")},
+            padding=6,
+            fontsize=17,
+        ),
+    ]
+
+
 screens = [
     Screen(
-        bottom=bar.Bar(
-            [
-                widget.Image(
-                    filename="/usr/share/lxqt/graphics/helix_60.png",
-                    background=colors[0],
-                    margin_x=6,
-                    mouse_callbacks={
-                        'Button1': rofi_cmd()
-                    }
-                ),                
-                widget.GroupBox(
-                    font="Ubuntu Bold",
-                    fontsize=12,
-                    margin_y=2,
-                    margin_x=0,
-                    padding_y=5,
-                    padding_x=0,
-                    borderwidth=3,
-                    active=colors[5],
-                    inactive=colors[6],
-                    rounded=True,
-                    # highlight_color=colors[9],
-                    highlight_method='block',
-                    urgent_alert_method='block',
-                    this_current_screen_border=colors[4],
-                    this_screen_border=colors[4],
-                    other_current_screen_border=colors[0],
-                    other_screen_border=colors[0],
-                    foreground=colors[0],
-                    background=colors[0],
-                    disable_drag=True
-                ),
-                widget.Prompt(
-                    prompt=lazy.run_extension(extension.J4DmenuDesktop(
-        background=colors[0][0],
-        # foreground=colors[2][0],
-        selected_background=colors[4][0],
-        # selected_foreground=colors[2][0],
-        dmenu_bottom=True,
-        dmenu_ignorecase=True,
-        dmenu_prompt=">",
-    )),
-                    # font="Ubuntu Mono",
-                    padding=10,
-                    foreground=colors[4],
-                    background=colors[1],
-                    # prompt="Run: ",
-                ),
-                widget.Sep(
-                    linewidth=0,
-                    padding=40,
-                    foreground=colors[0],
-                    background=colors[0]
-                ),
-                widget.WindowName(
-                    foreground=colors[2],
-                    background=colors[0],
-                    **widget_default
-                ),
-                widget.TextBox(
-                    text='',
-                    foreground=colors[4],
-                    background=colors[0],
-                    **widget_default,
-                    fontsize=45
-                ),
-                widget.Systray(                    
-                    background=colors[4],
-                    padding=0,                    
-                ),
-                widget.TextBox(
-                    text='',
-                    foreground=colors[2],
-                    background=colors[4],
-                    **widget_default,
-                    fontsize=45
-                ),
-                widget.TextBox(
-                    text="",
-                    foreground=colors[7],
-                    background=colors[2],
-                    **widget_default,
-                    fontsize=16
-                ),
-                widget.CPU(
-                    foreground=colors[0],
-                    background=colors[2],
-                    format="{freq_current}Ghz {load_percent}%",
-                    mouse_callbacks={'Button1': lazy.spawn(
-                        'terminator -e htop')},
-                    padding=5,
-                ),
-                widget.TextBox(
-                    text='',
-                    foreground=colors[4],
-                    background=colors[2],
-                    **widget_default,
-                    fontsize=45
-                ),
-                widget.TextBox(
-                    text="",
-                    foreground=colors[7],
-                    background=colors[4],
-                    **widget_default,
-                    fontsize=16
-                ),
-                widget.Memory(
-                    foreground=colors[7],
-                    background=colors[4],
-                    mouse_callbacks={'Button1': lazy.spawn(
-                        'terminator -e htop')},
-                    padding=5
-                ),
-                widget.TextBox(
-                    text='',
-                    foreground=colors[2],
-                    background=colors[4],
-                    **widget_default,
-                    fontsize=45
-                ),
-                widget.TextBox(
-                    text="直",
-                    foreground=colors[7],
-                    background=colors[2],
-                    **widget_default,
-                    fontsize=16,
-                    mouse_callbacks={'Button1': lazy.spawn(
-                        'rofi-network-manager')},
-                ),
-                widget.Net(
-                    foreground=colors[7],
-                    background=colors[2],
-                    prefix="M",
-                    format="{down}↓↑{up}",
-                    mouse_callbacks={'Button1': lazy.spawn(
-                        'rofi-network-manager')},                                    
-                ),
-                widget.TextBox(
-                    text='',
-                    foreground=colors[4],
-                    background=colors[2],
-                    **widget_default,
-                    fontsize=37
-                ),
-                widget.TextBox(
-                    text="墳",
-                    foreground=colors[7],
-                    background=colors[4],
-                    **widget_default,
-                    mouse_callbacks={
-                        "Button1": lazy.spawn("pavucontrol")},
-                    fontsize=16
-                ),
-                widget.PulseVolume(
-                    foreground=colors[7],
-                    background=colors[4],
-                    padding=5,
-                    limit_max_volume=True,
-                ),
-                widget.TextBox(
-                    text='',
-                    foreground=colors[2],
-                    background=colors[4],
-                    **widget_default,
-                    fontsize=37
-                ),
-                widget.Battery(
-                    foreground=colors[7],
-                    background=colors[2],
-                    charge_char="",
-                    full_char="",
-                    discharge_char="",
-                    unknown_char="",
-                    empty_char="",
-                    format=" {char} {percent:2.0%} ",
-                ),
-                widget.TextBox(
-                    text='',
-                    foreground=colors[4],
-                    background=colors[2],
-                    **widget_default,
-                    fontsize=42
-                ),
-                widget.TextBox(
-                    text='',
-                    foreground=colors[7],
-                    background=colors[4],
-                    **widget_default,
-                    fontsize=16
-                ),
-                widget.Clock(
-                    foreground=colors[7],
-                    background=colors[4],
-                    # mouse_callbacks={
-                    #     "Button1": lambda qtile: qtile.cmd_spawn(PWA.calendar())},
-                    format=" %a, %B %d - %H:%M ",
-                ),
-                widget.TextBox(
-                    text='',
-                    foreground=colors[7],
-                    background=colors[4],
-                    mouse_callbacks={'Button1': lazy.spawn(
-                        "rofi -show powermenu -theme powermenu -modi powermenu:' \
-                            rofi-power-menu --choices=lockscreen/logout/suspend/reboot/shutdown'")},
-                    padding=6,
-                    fontsize=16,
-                ),
-            ],
-            size=24,
-        ),
+        bottom=bar.Bar(get_widgets(primary=True),
+                       size=24,
+                       ),
+    ),
+    Screen(
+        bottom=bar.Bar(get_widgets(),
+                       size=24,
+                       ),
     ),
 ]
 
@@ -374,10 +308,10 @@ mouse = [
 ]
 
 groups.extend([ScratchPad("terminal", [
-    DropDown("terminal", terminal, x=0.0, y=0.65, width=0.998)])])
+    DropDown("terminal", terminal, x=0.0, y=0.25, width=0.998, height=0.75)])])
 
 keys.extend([Key([mod, "control"], "return", lazy.group["terminal"].dropdown_toggle("terminal")),
-])    
+             ])
 
 dgroups_key_binder = None
 dgroups_app_rules = []  # type: list
