@@ -48,7 +48,7 @@ keys = [
     Key([mod], "w", lazy.window.kill()),
     Key([mod, "control"], "r", lazy.reload_config()),
     Key([mod, "control"], "q", lazy.shutdown()),
-    Key([mod, "control", "shift"], "return", lazy.spawn("virtual-monitor")),
+    Key([mod, "control", "shift"], "return", lazy.spawn("virtual-monitor $(xrandr --listactivemonitors | grep -m1 0 | grep -o '[^ ]*$')")),
     # Applications
     Key([mod], "r", lazy.spawn("rofi -show run -display-run '> '")),
     Key([mod], "return", rofi_cmd()),
@@ -296,6 +296,21 @@ screens = [
                        size=24,
                        ),
     ),
+    Screen(
+        bottom=bar.Bar(get_widgets(),
+                       size=24,
+                       ),
+    ),
+    Screen(
+        bottom=bar.Bar(get_widgets(),
+                       size=24,
+                       ),
+    ),
+    Screen(
+        bottom=bar.Bar(get_widgets(),
+                       size=24,
+                       ),
+    ),
 ]
 
 # Drag floating layouts.
@@ -353,7 +368,8 @@ wl_input_rules = None
 wmname = "LG3D"
 
 
-@hook.subscribe.startup_once
-def start_once():
+@hook.subscribe.startup
+def start():
     home = os.path.expanduser('~')
     subprocess.call([home + '/.config/qtile/autostart.sh'])
+

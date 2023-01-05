@@ -1,10 +1,15 @@
 #!/usr/bin/env bash 
-if [ $# -ne 1 ]
+"
+Spawn four virtual monitors on primary display device (default). 
+Optional, specify alternative output device.
+"
+
+if [ $# -eq 1 ]
 then 
     echo "Please specify output device; e.g. \"`basename "$0"` $MONITOR\""
-    exit 1
-else
     MONITOR=$1
+else
+    MONITOR=$(xrandr --listactivemonitors | grep -m1 0 | grep -o "[^ ]*$")
 fi
 
 read WIDTH HEIGHT WIDTH_MM HEIGHT_MM <<< $(xdpyinfo |  
@@ -27,4 +32,3 @@ then
 fi
 
 qtile shell -c "reload_config()"
-
