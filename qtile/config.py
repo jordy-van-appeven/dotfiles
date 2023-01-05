@@ -72,18 +72,18 @@ keys = [
 ]
 
 # You can define a letter and its icon here
-group_names = ["H  ",
+group_names = ["S  ",
                "B  ",
                "D  ",
                "T  ",
                "E  ",
                "C  ",
                "V  ",
-               "A  ",
+               "M  ",
                #    "R  ",
                ]
 
-groups = [Group(name, layout="monadtall") for name in group_names]
+groups = [Group(name, layout="columns") for name in group_names]
 
 for group in groups:
     keys.extend(
@@ -103,11 +103,11 @@ layout_default = {"border_width": 2, "margin": 0,
 
 layouts = [
     # layout.Bsp(),
-    # layout.Columns(**layout_default),
+    layout.Columns(**layout_default, num_columns=2, insert_position=1),
     # layout.Floating(**layout_default),
     # layout.Matrix(),
     layout.Max(**layout_default),
-    layout.MonadTall(**layout_default),
+    # layout.MonadTall(**layout_default),
     # layout.MonadWide(**layout_default),
     # layout.RatioTile(),
     # layout.Stack(num_stacks=2),
