@@ -10,8 +10,11 @@ from libqtile.utils import guess_terminal
 
 mod = "mod4"
 alt = "mod1"
-# tab = "mod3"
 terminal = guess_terminal()
+#file_manager = "nautilus --new-window "
+file_manager = terminal + " --command vifm"
+browser = "chromium --new-window "
+dev_env = terminal + " --command vim"
 
 from theme import dracula
 theme = dracula
@@ -20,42 +23,45 @@ rofi_cmd = lazy.spawn("rofi -show drun -display-drun '> '")
 
 keys = [
     # Switch between windows
-    Key([mod, "control"], "h", lazy.layout.left()),
-    Key([mod, "control"], "l", lazy.layout.right()),
-    Key([mod, "control"], "j", lazy.layout.down()),
-    Key([mod, "control"], "k", lazy.layout.up()),
-    Key([mod, "control"], "space", lazy.layout.next()),
+    Key([mod], "h", lazy.layout.left()),
+    Key([mod], "l", lazy.layout.right()),
+    Key([mod], "j", lazy.layout.down()),
+    Key([mod], "k", lazy.layout.up()),
+    Key([mod], "space", lazy.layout.next()),
     # Move windows between left/right columns or move up/down in current stack.
     # Moving out of range in Columns layout will create new column.
-    Key([mod, "control", "shift"], "h", lazy.layout.shuffle_left(),),
-    Key([mod, "control", "shift"], "l", lazy.layout.shuffle_right()),
-    Key([mod, "control", "shift"], "j", lazy.layout.shuffle_down()),
-    Key([mod, "control", "shift"], "k", lazy.layout.shuffle_up()),
+    Key([mod, "shift"], "h", lazy.layout.shuffle_left(),),
+    Key([mod, "shift"], "l", lazy.layout.shuffle_right()),
+    Key([mod, "shift"], "j", lazy.layout.shuffle_down()),
+    Key([mod, "shift"], "k", lazy.layout.shuffle_up()),
+    Key([mod, "shift"], "return", lazy.layout.toggle_split()),
     # Grow windows
     # Key([mod, "shift"], "h", lazy.layout.shrink()),
     # Key([mod, "shift"], "l", lazy.layout.grow()),
-    Key([mod, "shift"], "j", lazy.layout.shrink()),
-    Key([mod, "shift"], "k", lazy.layout.grow()),
-    Key([mod, "shift"], "n", lazy.layout.reset()),
+    Key([mod, "control"], "j", lazy.layout.shrink()),
+    Key([mod, "control"], "k", lazy.layout.grow()),
+    Key([mod, "control"], "n", lazy.layout.reset()),
     # Key([mod], "m", lazy.layout.maximize()),
-    Key([mod], "f", lazy.window.toggle_floating()),
-    Key([mod], "m", lazy.window.toggle_fullscreen()),
+    Key([mod, "control"], "f", lazy.window.toggle_floating()),
+    Key([mod, "control"], "m", lazy.window.toggle_fullscreen()),
     # Toggle between split and unsplit sides of stack.
     # Key([mod, "shift"], "space", lazy.layout.toggle_split()),
     # Toggle between different layouts as defined below
-    Key([mod, "shift"], "Tab", lazy.next_layout()),
+    Key([mod], "Tab", lazy.next_layout()),
+    Key([mod], "w", lazy.run_extension(extension.WindowList())),
     # Qtile
-    Key([mod], "w", lazy.window.kill()),
+    Key([mod, "control"], "w", lazy.window.kill()),
     Key([mod, "control"], "r", lazy.reload_config()),
     Key([mod, "control"], "q", lazy.shutdown()),
     Key([mod, "control", "shift"], "return", lazy.spawn("virtual-monitor $(xrandr --listactivemonitors | grep -m1 0 | grep -o '[^ ]*$')")),
     # Applications
     Key([mod], "r", lazy.spawn("rofi -show run -display-run '> '")),
-    Key([mod], "return", rofi_cmd()),
-    Key([mod, "control"], "w", lazy.run_extension(extension.WindowList())),
+    Key([mod], "return", rofi_cmd()),    
+    Key([mod, "control"], "d", lazy.spawn(dev_env)),
     Key([mod, "control"], "t", lazy.spawn(terminal)),
-    Key([mod, "control"], "b", lazy.spawn("chromium")),
-    Key([mod, "control"], "e", lazy.spawn("nautilus")),
+    Key([mod, "control"], "b", lazy.spawn(browser)),
+    Key([mod, "control"], "e", lazy.spawn(file_manager)),
+    Key([mod, "control"], "v", lazy.spawn(browser + "http://youtube.com")),
     # Treetab controls
     # Key([mod, "shift"], "j", lazy.layout.move_up()),
     # Key([mod, "shift"], "k", lazy.layout.move_down()),
