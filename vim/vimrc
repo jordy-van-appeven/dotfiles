@@ -97,3 +97,7 @@ command Fms :SplitVifm<CR>
 command Fmd :DiffVifm<CR>
 command Fmt :TabVifm<CR>
 
+" colorizer plugin
+let g:colorizer_auto_color = 1
+let g:colorizer_colornames = 0
+

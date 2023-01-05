@@ -8,6 +8,12 @@ $ sudo apt install vim-gtk
 
 ### Plugins
 
+#### colorizer
+```shell
+$ https://github.com/chrisbra/Colorizer.git ~/.vim/pack/start/Colorizer
+$ vim ~/.vim/pack/plugins/start/Colorizer/Colorizer.vmb -c ":so %"
+```
+
 #### fugitive
 ```shell
 $ mkdir -p ~/.vim/pack/tpope/start
