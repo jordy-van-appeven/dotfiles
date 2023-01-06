@@ -3,12 +3,13 @@
 ## Install
 
 ```shell
-$ git clone https://github.com/alacritty/alacritty.git
+$ sudo apt install cargo
+$ cd ~ && git clone https://github.com/alacritty/alacritty.git
 ```
 
-Next, follow manual build [instructions](https://github.com/alacritty/alacritty/blob/master/INSTALL.md#debianubuntu)
+Next, follow manual [build](https://github.com/alacritty/alacritty/blob/master/INSTALL.md#debianubuntu) and post [build](https://github.com/alacritty/alacritty/blob/master/INSTALL.md#post-build) instructions. 
 
-Then change the default terminal emulator
+Then change the default terminal emulator.
 
 ```shell
 $ sudo update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator /usr/local/bin/alacritty 50

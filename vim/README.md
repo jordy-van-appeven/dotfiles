@@ -10,7 +10,7 @@ $ sudo apt install vim-gtk
 
 #### colorizer
 ```shell
-$ https://github.com/chrisbra/Colorizer.git ~/.vim/pack/start/Colorizer
+$ git clone https://github.com/chrisbra/Colorizer.git ~/.vim/pack/start/Colorizer
 $ vim ~/.vim/pack/plugins/start/Colorizer/Colorizer.vmb -c ":so %"
 ```
 
@@ -36,7 +36,5 @@ $ git clone https://github.com/vifm/vifm.vim.git ~/.vim/pack/plugins/start/vifm
 ```shell
 $ mkdir -p ~/.vim/pack/themes/start
 
-$ cd ~/.vim/pack/themes/start
-
-$ git clone https://github.com/dracula/vim.git dracula
+$ git clone https://github.com/dracula/vim.git ~/.vim/pack/themes/start/dracula
 ```

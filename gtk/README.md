@@ -7,9 +7,9 @@ $ wget https://github.com/dracula/gtk/archive/master.zip
 
 $ mkdir -p ~/.themes/Dracula
 
-$ unzip gtk-master.zip
+$ unzip master.zip
 
-$ mv gtk-master/* ~/.themes/Dracula/. && rm gtk-master.zip gtk-master -r
+$ mv gtk-master/* ~/.themes/Dracula/. && rm master.zip gtk-master -r
 ```
 
 ## Install Dracula icons

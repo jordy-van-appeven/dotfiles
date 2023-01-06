@@ -9,10 +9,12 @@ $ sudo apt install suckless-tools
 $ sudo apt install fonts-font-awesome # Note, appears needed for proper font display
 ```
 
-Additionally, download `Ubuntu Nerd Font` from http://nerdfonts.com/font-downloads. Then install fonts by extracting to `~/.fonts` and rebuild font cache.
+Additionally, download [Hack Nerd Font](https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/Hack.zip) and [Ubuntu Nerd Font](https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/Ubuntu.zip). 
+Install fonts by extracting to `~/.fonts` and rebuild font cache.
 
 ```shell
-$ unzip Ubuntu.zip -d ~/.fonts
+$ unzip ~/Downloads/Hack.zip -d ~/.fonts
+$ unzip ~/Downloads/Ubuntu.zip -d ~/.fonts
 $ fc-cache -fv
 ```
 
