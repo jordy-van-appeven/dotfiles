@@ -141,6 +141,10 @@ command! zip if [ -n "%a" ]; then
            \ fi
 
 command! zip zip -r %c.zip %f
+" https://q2a.vifm.info/720/how-do-i-extract-archive-files?show=721#a721
+command! extract extract %a %f %n
+command! extract! extract -f %a %f %n
+
 command! run !! ./%f
 command! make !!make %a
 command! mkcd :mkdir %a | cd %a
