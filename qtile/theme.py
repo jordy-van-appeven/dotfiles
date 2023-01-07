@@ -3,10 +3,11 @@
 # Theme Color Dictionaries
 
 dracula = {
-        "background": "#282a36",
-        "foreground": "#f8f8f2",
-        "bar_background": "#8d62a9",
-        "bar_foreground": "#000000",
+        "bar_background": "#282a36",
+        "bar_foreground": "#f8f8f2",
+        "widget_background": "#282a36",
+        "widget_foreground": "#f8f8f2",
+        "active": "#8d62a9",
         "inactive": "#44475a",
         "comment": "#6272a4",
         "cyan":	"#8be9fd",

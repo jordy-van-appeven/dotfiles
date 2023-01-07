@@ -144,8 +144,8 @@ widget_defaults = dict(
     font='Ubuntu Nerd Font',
     fontsize=14,
     padding=4,
-    foreground=theme["bar_foreground"],
-    background=theme["bar_background"]
+    foreground=theme["widget_foreground"],
+    background=theme["widget_background"]
 )
 extension_defaults = widget_defaults.copy()
 
@@ -154,7 +154,7 @@ def get_widgets(primary=False):
     return [
         widget.Image(
             filename="/usr/share/lxqt/themes/Lubuntu Arc/mainmenu.svg",
-            background=theme["background"],
+            background=theme["bar_background"],
             margin=2,
             scale=True,
             margin_x=5,            
@@ -170,78 +170,64 @@ def get_widgets(primary=False):
             padding_y=5,
             padding_x=4,
             borderwidth=3,
-            active=theme["foreground"],
+            active=theme["bar_foreground"],
             inactive=theme["inactive"],
             rounded=True,
-            highlight_color=theme["bar_background"],
+            highlight_color=theme["active"],
             highlight_method='block',
             urgent_alert_method='block',
-            this_current_screen_border=theme["bar_background"],
-            this_screen_border=theme["bar_background"],
-            other_current_screen_border=theme["background"],
-            other_screen_border=theme["background"],
-            foreground=theme["background"],
-            background=theme["background"],
+            this_current_screen_border=theme["active"],
+            this_screen_border=theme["active"],
+            other_current_screen_border=theme["bar_background"],
+            other_screen_border=theme["bar_background"],
+            foreground=theme["bar_background"],
+            background=theme["bar_background"],
             disable_drag=True
         ),
         widget.Sep(
             linewidth=0,
             padding=40,
-            foreground=theme["background"],
-            background=theme["background"],
+            foreground=theme["bar_background"],
+            background=theme["bar_background"],
         ),
         widget.WindowName(
-            foreground=theme["bar_background"],
-            background=theme["background"],            
+            foreground=theme["active"],
+            background=theme["bar_background"],            
         ),
         widget.TextBox(
             text=' ',
-            foreground=theme["bar_background"],
-            background=theme["background"],
+            foreground=theme["widget_background"],
+            background=theme["bar_background"],
             fontsize=45,
             padding=0,
         ),
         widget.Systray(
-            foreground=theme["bar_foreground"],
-            background=theme["bar_background"],
-        ) if primary else widget.Sep(foreground=theme["bar_foreground"], background=theme["bar_background"],),
+        ) if primary else widget.Sep(),
         widget.TextBox(
             text=" ",
-            foreground=theme["bar_foreground"],
-            background=theme["bar_background"],
             fontsize=17,
         ),
         widget.CPU(
-            foreground=theme["bar_foreground"],
-            background=theme["bar_background"],
             format="{freq_current}Ghz {load_percent}%",
             mouse_callbacks={'Button1': lazy.spawn(
                 terminal + ' -e htop')},
         ),
         widget.TextBox(
             text=" ",
-            foreground=theme["bar_foreground"],
-            background=theme["bar_background"],
             fontsize=17
         ),
         widget.Memory(
-            foreground=theme["bar_foreground"],
-            background=theme["bar_background"],
             format='{MemUsed:.0f}{mm}/{MemTotal:.0f}{mm}',
             mouse_callbacks={'Button1': lazy.spawn(
                 terminal + ' -e htop')},
         ),
         widget.TextBox(
             text=" 直",
-            foreground=theme["bar_foreground"],
-            background=theme["bar_background"],
             fontsize=17,
             mouse_callbacks={'Button1': lazy.spawn(
                 'rofi-network-manager')},
         ),
         widget.Net(
-            foreground=theme["bar_foreground"],
-            background=theme["bar_background"],
             prefix="M",
             format="{down} ↓↑ {up}",
             mouse_callbacks={'Button1': lazy.spawn(
@@ -249,21 +235,15 @@ def get_widgets(primary=False):
         ),
         widget.TextBox(
             text=" 墳",
-            foreground=theme["bar_foreground"],
-            background=theme["bar_background"],
             mouse_callbacks={
                 "Button1": lazy.spawn("pavucontrol")},
             fontsize=17,
         ),
         widget.PulseVolume(
-            foreground=theme["bar_foreground"],
-            background=theme["bar_background"],
             limit_max_volume=True,
             fmt="{}"
         ),
         widget.Battery(
-            foreground=theme["bar_foreground"],
-            background=theme["bar_background"],
             charge_char="",
             full_char="",
             discharge_char="",
@@ -272,16 +252,12 @@ def get_widgets(primary=False):
             format=" {char} {percent:2.0%} ",
         ),
         widget.Clock(
-            foreground=theme["bar_foreground"],
-            background=theme["bar_background"],
             # mouse_callbacks={
             #     "Button1": lambda qtile: qtile.cmd_spawn(PWA.calendar())},
             format=" %a, %B %d |  %H:%M ",
         ),
         widget.TextBox(
             text=' ',
-            foreground=theme["bar_foreground"],
-            background=theme["bar_background"],
             mouse_callbacks={'Button1': lazy.spawn(
                 "rofi -show powermenu -theme powermenu -modi powermenu:' \
                             rofi-power-menu --choices=lockscreen/logout/suspend/reboot/shutdown'")},
