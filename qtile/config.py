@@ -142,7 +142,7 @@ layouts = [
 
 widget_defaults = dict(
     font='Ubuntu Nerd Font',
-    fontsize=14,
+    fontsize=15,
     padding=4,
     foreground=theme["widget_foreground"],
     background=theme["widget_background"]
@@ -155,16 +155,16 @@ def get_widgets(primary=False):
         widget.Image(
             filename="/usr/share/lxqt/themes/Lubuntu Arc/mainmenu.svg",
             background=theme["bar_background"],
-            margin=2,
             scale=True,
-            margin_x=5,            
+            margin_x=3,
+            margin_y=3,
             mouse_callbacks={
                 'Button1': rofi_cmd()
             }
         ),
         widget.GroupBox(
             font="Ubuntu Nerd Font",
-            fontsize=14,
+            fontsize=widget_defaults['fontsize'] + 1,
             margin_y=4,
             margin_x=0,
             padding_y=5,
@@ -202,11 +202,11 @@ def get_widgets(primary=False):
             padding=0,
         ),
         widget.Systray(
-        ) if primary else widget.Sep(),
+        ) if primary else widget.Sep(foreground=theme["widget_background"]),
         widget.TextBox(
-            text=" ",
-            fontsize=17,
-        ),
+                text=" ",
+                fontsize=widget_defaults['fontsize'] + 2,
+                ),
         widget.CPU(
             format="{freq_current}Ghz {load_percent}%",
             mouse_callbacks={'Button1': lazy.spawn(
@@ -214,16 +214,16 @@ def get_widgets(primary=False):
         ),
         widget.TextBox(
             text=" ",
-            fontsize=17
+            fontsize=widget_defaults['fontsize'] + 2,
         ),
         widget.Memory(
-            format='{MemUsed:.0f}{mm}/{MemTotal:.0f}{mm}',
+            format='{MemUsed:.0f}{mm} / {MemTotal:.0f}{mm}',
             mouse_callbacks={'Button1': lazy.spawn(
                 terminal + ' -e htop')},
         ),
         widget.TextBox(
             text=" 直",
-            fontsize=17,
+            fontsize=widget_defaults['fontsize'] + 2,
             mouse_callbacks={'Button1': lazy.spawn(
                 'rofi-network-manager')},
         ),
@@ -237,7 +237,7 @@ def get_widgets(primary=False):
             text=" 墳",
             mouse_callbacks={
                 "Button1": lazy.spawn("pavucontrol")},
-            fontsize=17,
+            fontsize=widget_defaults['fontsize'] + 2,
         ),
         widget.PulseVolume(
             limit_max_volume=True,
@@ -262,38 +262,39 @@ def get_widgets(primary=False):
                 "rofi -show powermenu -theme powermenu -modi powermenu:' \
                             rofi-power-menu --choices=lockscreen/logout/suspend/reboot/shutdown'")},
             padding=6,
-            fontsize=17,
+            fontsize=widget_defaults['fontsize'] + 2,
         ),
     ]
 
+bar_defaults = {'size': 28,}
 
 screens = [
-    Screen(
-        bottom=bar.Bar(get_widgets(primary=True),
-                       size=24,
-                       ),
-    ),
-    Screen(
-        bottom=bar.Bar(get_widgets(),
-                       size=24,
-                       ),
-    ),
-    Screen(
-        bottom=bar.Bar(get_widgets(),
-                       size=24,
-                       ),
-    ),
-    Screen(
-        bottom=bar.Bar(get_widgets(),
-                       size=24,
-                       ),
-    ),
-    Screen(
-        bottom=bar.Bar(get_widgets(),
-                       size=24,
-                       ),
-    ),
-]
+        Screen(
+            bottom=bar.Bar(get_widgets(primary=True),
+                **bar_defaults,
+                ),
+            ),
+        Screen(
+            bottom=bar.Bar(get_widgets(),
+                **bar_defaults,
+                ),
+            ),
+        Screen(
+            bottom=bar.Bar(get_widgets(),
+                **bar_defaults,
+                ),
+            ),
+        Screen(
+            bottom=bar.Bar(get_widgets(),
+                **bar_defaults,
+                ),
+            ),
+        Screen(
+            bottom=bar.Bar(get_widgets(),
+                **bar_defaults,
+                ),
+            ),
+        ]
 
 # Drag floating layouts.
 mouse = [
@@ -305,7 +306,7 @@ mouse = [
 ]
 
 groups.extend([ScratchPad("terminal", [
-    DropDown("terminal", terminal, x=0.0, y=0.25, width=0.998, height=0.75)])])
+    DropDown("terminal", terminal, x=0.0, y=0.28, width=0.998, height=0.75)])])
 
 keys.extend([Key([mod, "control"], "return", lazy.group["terminal"].dropdown_toggle("terminal")),
              ])

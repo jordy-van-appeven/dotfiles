@@ -7,7 +7,7 @@ configuration{
 window {
 	width: 9%;
 	x-offset: -1;
-	y-offset: -26;	
+	y-offset: -29;	
 	location: southeast;
 	anchor: southeast;	
 }

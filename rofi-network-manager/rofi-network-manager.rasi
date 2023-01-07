@@ -9,7 +9,7 @@ configuration {
 @theme "dracula1"
 
 window {
-	y-offset: -26;	
+	y-offset: -29;	
 	padding: 			15;
 }
 mainbox {
