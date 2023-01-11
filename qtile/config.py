@@ -59,7 +59,7 @@ keys = [
     Key([mod], "r", lazy.spawn("rofi -show run -display-run '> '")),
     Key([mod], "return", rofi_cmd()),    
     Key([mod, "control"], "d", lazy.spawn(dev_env)),
-    Key([mod, "control"], "t", lazy.spawn(terminal)),
+    Key([mod, "control"], "t", lazy.spawn(terminal + " --command tmux")),
     Key([mod, "control"], "b", lazy.spawn(browser)),
     Key([mod, "control"], "e", lazy.spawn(file_manager)),
     Key([mod, "control"], "v", lazy.spawn(browser + "http://youtube.com")),
