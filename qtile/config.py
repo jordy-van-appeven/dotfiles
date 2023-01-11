@@ -13,7 +13,7 @@ alt = "mod1"
 terminal = guess_terminal()
 #file_manager = "nautilus --new-window "
 file_manager = terminal + " --command vifm"
-browser = "chromium --new-window "
+browser = "chromium --new-window"
 dev_env = terminal + " --command vim"
 
 from theme import dracula
@@ -60,9 +60,9 @@ keys = [
     Key([mod], "return", rofi_cmd()),    
     Key([mod, "control"], "d", lazy.spawn(dev_env)),
     Key([mod, "control"], "t", lazy.spawn(terminal + " --command tmux")),
-    Key([mod, "control"], "b", lazy.spawn(browser)),
+    Key([mod, "control"], "b", lazy.spawn(browser + " --restore-last-session")),
     Key([mod, "control"], "e", lazy.spawn(file_manager)),
-    Key([mod, "control"], "v", lazy.spawn(browser + "http://youtube.com")),
+    Key([mod, "control"], "v", lazy.spawn(browser + " http://youtube.com")),
     # Treetab controls
     # Key([mod, "shift"], "j", lazy.layout.move_up()),
     # Key([mod, "shift"], "k", lazy.layout.move_down()),
