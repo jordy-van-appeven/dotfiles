@@ -70,8 +70,20 @@ set splitbelow splitright
 " Remap split resize commands
 nnoremap <silent> <C-H> :vertical resize +3<CR>
 nnoremap <silent> <C-L> :vertical resize -3<CR>
-nnoremap <silent> <C-J> :resize -3<CR>
-nnoremap <silent> <C-K> :resize +3<CR>
+nnoremap <silent> <C-J> :resize +3<CR>
+nnoremap <silent> <C-K> :resize -3<CR>
+
+" Navigating panes
+let g:tmux_navigator_no_mappings = 1
+
+noremap <silent> <C-w>h :<C-U>TmuxNavigateLeft<cr>
+noremap <silent> <C-w>j :<C-U>TmuxNavigateDown<cr>
+noremap <silent> <C-w>k :<C-U>TmuxNavigateUp<cr>
+noremap <silent> <C-w>l :<C-U>TmuxNavigateRight<cr>
+noremap <silent> <C-w>p :<C-U>TmuxNavigatePrevious<cr>
+
+" Write all buffers before navigating from Vim to tmux pane
+let g:tmux_navigator_save_on_switch = 2
 
 " Execute current file
 command Run call ExecuteFile()
