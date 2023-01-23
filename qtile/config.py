@@ -63,6 +63,7 @@ keys = [
     Key([mod, "control"], "b", lazy.spawn(browser + " --restore-last-session")),
     Key([mod, "control"], "e", lazy.spawn(file_manager)),
     Key([mod, "control"], "v", lazy.spawn(browser + " http://youtube.com")),
+    Key([], "Print", lazy.spawn("gnome-screenshot --interactive")),
     # Treetab controls
     # Key([mod, "shift"], "j", lazy.layout.move_up()),
     # Key([mod, "shift"], "k", lazy.layout.move_down()),
