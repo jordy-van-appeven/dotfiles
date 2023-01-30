@@ -13,7 +13,6 @@ mod = "mod4"
 alt = "mod1"
 terminal = guess_terminal()
 file_manager = "nautilus --new-window "
-#file_manager = terminal + " --command vifm"
 browser = "chromium --new-window"
 dev_env = str(terminal) + " --command vim"
 
@@ -159,11 +158,11 @@ extension_defaults = widget_defaults.copy()
 def get_widgets(primary=False):
     widgets = [ 
         widget.Image(
-            filename="/usr/share/lxqt/themes/Lubuntu Arc/mainmenu.svg",
+            filename="/home/jordy/.local/share/icons/mark_blue@8x.png",
             background=theme["bar_background"],
             scale=True,
-            margin_x=3,
-            margin_y=3,
+            margin_x=2,
+            margin_y=0,
             mouse_callbacks={
                 'Button1': rofi_cmd()
                 }
@@ -237,7 +236,7 @@ def get_widgets(primary=False):
                     ),
                 widget.Net(
                     prefix="M",
-                    format="{down:.2f}{down_suffix} ↓↑ {up:.2f}{up_suffix}",
+                    format="{down} ↓↑ {up}",
                     mouse_callbacks={'Button1': lazy.spawn(
                         'rofi-network-manager')},
                     ),
