@@ -13,7 +13,6 @@ mod = "mod4"
 alt = "mod1"
 terminal = guess_terminal()
 file_manager = "nautilus --new-window "
-#file_manager = terminal + " --command vifm"
 browser = "chromium --new-window"
 dev_env = str(terminal) + " --command vim"
 
@@ -64,7 +63,8 @@ keys = [
     Key([mod], "return", rofi_cmd()),    
     Key([mod, "control"], "d", lazy.spawn(dev_env)),
     Key([mod, "control"], "t", lazy.spawn(str(terminal) + " --command tmux new -Asworkspace; choose-tree -Zs")),
-    Key([mod, "control"], "b", lazy.spawn(browser + " --restore-last-session")),
+    Key([mod, "control"], "b", lazy.spawn(browser + " --restore-last-session --class=chromium-default")),
+    Key([mod, "control"], "c", lazy.spawn(browser + " --class=teams --user-data-dir=~/.config/teams https://teams.microsoft.com/v2/")),
     Key([mod, "control"], "e", lazy.spawn(file_manager)),
     Key([mod, "control"], "v", lazy.spawn(browser + " http://youtube.com")),
     Key([], "Print", lazy.spawn("gnome-screenshot --interactive")),
@@ -86,11 +86,11 @@ keys = [
 group_default = {"layout": "columns"}
 
 groups = [Group("S  ", matches=Match(wm_class=re.compile("AccerionControlCenter.*")), **group_default),
-        Group("B  ", matches=Match(wm_class=["Chromium"]), **group_default),
+        Group("B  ", matches=Match(wm_class=["chromium"]), **group_default),
         Group("D  ", matches=Match(wm_class=["code", "jetbrains-clion"]), **group_default),
         Group("T  ", matches=Match(wm_class=["Alacritty"]), **group_default),
         Group("E  ", matches=Match(wm_class=re.compile(".*Nautilus")), **group_default),
-        Group("C  ", matches=Match(wm_class=re.compile("Microsoft Teams.*")), **group_default),
+        Group("C  ", matches=Match(wm_class=["teams"]), **group_default),
         Group("V  ", matches=Match(wm_class=["vlc"]), **group_default),
         Group("A  ", **group_default),
         Group("M  ", matches=Match(wm_class=["Virt-manager"]), ** group_default),
@@ -158,11 +158,11 @@ extension_defaults = widget_defaults.copy()
 def get_widgets(primary=False):
     widgets = [ 
         widget.Image(
-            filename="/usr/share/lxqt/themes/Lubuntu Arc/mainmenu.svg",
+            filename="/home/jordy/.local/share/icons/mark_blue@8x.png",
             background=theme["bar_background"],
             scale=True,
-            margin_x=3,
-            margin_y=3,
+            margin_x=2,
+            margin_y=0,
             mouse_callbacks={
                 'Button1': rofi_cmd()
                 }
@@ -236,7 +236,7 @@ def get_widgets(primary=False):
                     ),
                 widget.Net(
                     prefix="M",
-                    format="{down:.2f}{down_suffix} ↓↑ {up:.2f}{up_suffix}",
+                    format="{down} ↓↑ {up}",
                     mouse_callbacks={'Button1': lazy.spawn(
                         'rofi-network-manager')},
                     ),
