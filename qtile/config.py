@@ -2,6 +2,7 @@
 # Modified by Jordy van Appeven (https://github.com/jordy-van-appeven/dotfiles/tree/main/qtile)
 
 import os
+import re
 import subprocess
 from libqtile import bar, extension, hook, layout, widget
 from libqtile.config import Click, Drag, DropDown, Group, Key, Match, ScratchPad, Screen
@@ -79,19 +80,17 @@ keys = [
     Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl set 10%-")),
 ]
 
-# You can define a letter and its icon here
-group_names = ["S  ",
-               "B  ",
-               "D  ",
-               "T  ",
-               "E  ",
-               "C  ",
-               "V  ",
-               "M  ",
-               #    "R  ",
-               ]
+group_default = {"layout": "columns"}
 
-groups = [Group(name, layout="columns") for name in group_names]
+groups = [Group("S  ", matches=Match(wm_class=re.compile("AccerionControlCenter.*")), **group_default),
+        Group("B  ", matches=Match(wm_class=["Chromium"]), **group_default),
+        Group("D  ", matches=Match(wm_class=["code", "jetbrains-clion"]), **group_default),
+        Group("T  ", matches=Match(wm_class=["Alacritty"]), **group_default),
+        Group("E  ", matches=Match(wm_class=re.compile(".*Nautilus")), **group_default),
+        Group("C  ", matches=Match(wm_class=re.compile("Microsoft Teams.*")), **group_default),
+        Group("V  ", matches=Match(wm_class=["vlc"]), **group_default),
+        Group("M  ", **group_default),
+        ]
 
 for group in groups:
     keys.extend(
@@ -102,7 +101,7 @@ for group in groups:
                 lazy.group[group.name].toscreen(),
             ),
             Key([mod, "shift"], group.name[0],
-                lazy.window.togroup(group.name, switch_group=True)),
+                lazy.window.togroup(group.name, switch_group=False)),
         ]
     )
 
