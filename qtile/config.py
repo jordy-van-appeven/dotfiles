@@ -89,7 +89,8 @@ groups = [Group("S  ", matches=Match(wm_class=re.compile("AccerionControlCent
         Group("E  ", matches=Match(wm_class=re.compile(".*Nautilus")), **group_default),
         Group("C  ", matches=Match(wm_class=re.compile("Microsoft Teams.*")), **group_default),
         Group("V  ", matches=Match(wm_class=["vlc"]), **group_default),
-        Group("M  ", **group_default),
+        Group("A  ", **group_default),
+        Group("M  ", matches=Match(wm_class=["Virt-manager"]), ** group_default),
         ]
 
 for group in groups:
