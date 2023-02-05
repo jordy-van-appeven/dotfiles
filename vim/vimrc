@@ -64,6 +64,10 @@ packadd! dracula
 syntax enable
 colorscheme dracula
 
+" Clear highlighting on escape in normal mode
+nnoremap <esc> :let @/ = ""<return><esc>
+nnoremap <esc>^[ <esc>^[" Split behavior
+
 " Split behavior
 set splitbelow splitright
 
