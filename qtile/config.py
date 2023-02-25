@@ -29,6 +29,9 @@ keys = [
     Key([mod], "j", lazy.layout.down()),
     Key([mod], "k", lazy.layout.up()),
     Key([mod], "space", lazy.layout.next()),
+    # Switch between screens
+    Key([mod], 'comma', lazy.prev_screen()),
+    Key([mod], 'period', lazy.next_screen()),
     # Move windows between left/right columns or move up/down in current stack.
     # Moving out of range in Columns layout will create new column.
     Key([mod, "shift"], "h", lazy.layout.shuffle_left(),),
