@@ -110,7 +110,7 @@ for group in groups:
     )
 
 layout_default = {"border_width": 2, "margin": 0,
-                  "border_focus": theme["bar_background"], "border_normal": "#1D2330"}
+                  "border_focus": theme["active"], "border_normal": "#1D2330"}
 
 layouts = [
     # layout.Bsp(),
