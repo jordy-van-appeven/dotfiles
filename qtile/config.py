@@ -156,7 +156,7 @@ extension_defaults = widget_defaults.copy()
 
 
 def get_widgets(primary=False):
-    return [
+    widgets = [ 
         widget.Image(
             filename="/usr/share/lxqt/themes/Lubuntu Arc/mainmenu.svg",
             background=theme["bar_background"],
@@ -165,111 +165,113 @@ def get_widgets(primary=False):
             margin_y=3,
             mouse_callbacks={
                 'Button1': rofi_cmd()
-            }
-        ),
-        widget.GroupBox(
-            font="Ubuntu Nerd Font",
-            fontsize=widget_defaults['fontsize'] + 1,
-            margin_y=4,
-            margin_x=0,
-            padding_y=5,
-            padding_x=4,
-            borderwidth=3,
-            active=theme["bar_foreground"],
-            inactive=theme["inactive"],
-            rounded=True,
-            highlight_color=theme["active"],
-            highlight_method='block',
-            urgent_alert_method='block',
-            this_current_screen_border=theme["active"],
-            this_screen_border=theme["active"],
-            other_current_screen_border=theme["bar_background"],
-            other_screen_border=theme["bar_background"],
-            foreground=theme["bar_background"],
-            background=theme["bar_background"],
-            disable_drag=True
-        ),
-        widget.Sep(
-            linewidth=0,
-            padding=40,
-            foreground=theme["bar_background"],
-            background=theme["bar_background"],
-        ),
-        widget.WindowName(
-            foreground=theme["active"],
-            background=theme["bar_background"],            
-        ),
-        widget.TextBox(
-            text=' ',
-            foreground=theme["widget_background"],
-            background=theme["bar_background"],
-            fontsize=45,
-            padding=0,
-        ),
-        widget.Systray(
-        ) if primary else widget.Sep(foreground=theme["widget_background"]),
-        widget.TextBox(
-                text=" ",
-                fontsize=widget_defaults['fontsize'] + 2,
+                }
+            ),
+            widget.GroupBox(
+                font="Ubuntu Nerd Font",
+                fontsize=widget_defaults['fontsize'] + 1,
+                margin_y=4,
+                margin_x=0,
+                padding_y=5,
+                padding_x=4,
+                borderwidth=3,
+                active=theme["bar_foreground"],
+                inactive=theme["inactive"],
+                rounded=True,
+                highlight_color=theme["active"],
+                highlight_method='block',
+                urgent_alert_method='block',
+                this_current_screen_border=theme["active"],
+                this_screen_border=theme["active"],
+                other_current_screen_border=theme["bar_background"],
+                other_screen_border=theme["bar_background"],
+                foreground=theme["bar_background"],
+                background=theme["bar_background"],
+                disable_drag=True
                 ),
-        widget.CPU(
-            format="{freq_current}Ghz {load_percent}%",
-            mouse_callbacks={'Button1': lazy.spawn(
-                terminal + ' -e htop')},
-        ),
-        widget.TextBox(
-            text=" ",
-            fontsize=widget_defaults['fontsize'] + 2,
-        ),
-        widget.Memory(
-            format='{MemUsed:.0f}{mm} / {MemTotal:.0f}{mm}',
-            mouse_callbacks={'Button1': lazy.spawn(
-                terminal + ' -e htop')},
-        ),
-        widget.TextBox(
-            text=" 直",
-            fontsize=widget_defaults['fontsize'] + 2,
-            mouse_callbacks={'Button1': lazy.spawn(
-                'rofi-network-manager')},
-        ),
-        widget.Net(
-            prefix="M",
-            format="{down} ↓↑ {up}",
-            mouse_callbacks={'Button1': lazy.spawn(
-                'rofi-network-manager')},
-        ),
-        widget.TextBox(
-            text=" 墳",
-            mouse_callbacks={
-                "Button1": lazy.spawn("pavucontrol")},
-            fontsize=widget_defaults['fontsize'] + 2,
-        ),
-        widget.PulseVolume(
-            limit_max_volume=True,
-            fmt="{}"
-        ),
-        widget.Battery(
-            charge_char="",
-            full_char="",
-            discharge_char="",
-            unknown_char="",
-            empty_char="",
-            format=" {char} {percent:2.0%} ",
-        ),
-        widget.Clock(
-            # mouse_callbacks={
-            #     "Button1": lambda qtile: qtile.cmd_spawn(PWA.calendar())},
-            format=" %a, %B %d |  %H:%M ",
-        ),
-        widget.TextBox(
-            text=' ',
-            mouse_callbacks={'Button1': lazy.spawn(
-                "rofi -show powermenu -theme powermenu -modi powermenu:' \
-                            rofi-power-menu --choices=lockscreen/logout/suspend/reboot/shutdown'")},
-            padding=6,
-            fontsize=widget_defaults['fontsize'] + 2,
-        ),
-    ]
+            widget.WindowName(
+                padding=40,
+                foreground=theme["active"],
+                background=theme["bar_background"],            
+                ),
+            ] 
+    if not primary:
+        return widgets + [
+                widget.Sep(
+                    linewidth=0,
+                    size_percent=80,
+                    foreground=theme["bar_background"],
+                    background=theme["bar_background"],
+                    ),
+                ]
+    else:
+        return widgets + [
+                widget.TextBox(
+                    text=' ',
+                    foreground=theme["widget_background"],
+                    background=theme["bar_background"],
+                    fontsize=45,
+                    padding=0,
+                    ),
+                widget.Systray(),
+                widget.CPU(
+                    format="{freq_current}Ghz {load_percent}%",
+                    mouse_callbacks={'Button1': lazy.spawn(
+                        terminal + ' -e htop')},
+                    ),
+                widget.TextBox(
+                    text=" ",
+                    fontsize=widget_defaults['fontsize'] + 2,
+                    ),
+                widget.Memory(
+                    format='{MemUsed:.0f}{mm} / {MemTotal:.0f}{mm}',
+                    mouse_callbacks={'Button1': lazy.spawn(
+                        terminal + ' -e htop')},
+                    ),
+                widget.TextBox(
+                    text=" 直",
+                    fontsize=widget_defaults['fontsize'] + 2,
+                    mouse_callbacks={'Button1': lazy.spawn(
+                        'rofi-network-manager')},
+                    ),
+                widget.Net(
+                    prefix="M",
+                    format="{down} ↓↑ {up}",
+                    mouse_callbacks={'Button1': lazy.spawn(
+                        'rofi-network-manager')},
+                    ),
+                widget.TextBox(
+                    text=" 墳",
+                    mouse_callbacks={
+                        "Button1": lazy.spawn("pavucontrol")},
+                    fontsize=widget_defaults['fontsize'] + 2,
+                    ),
+                widget.PulseVolume(
+                        limit_max_volume=True,
+                        fmt="{}"
+                        ),
+                widget.Battery(
+                        charge_char="",
+                        full_char="",
+                        discharge_char="",
+                        unknown_char="",
+                        empty_char="",
+                        format=" {char} {percent:2.0%} ",
+                        ),
+                widget.Clock(
+                        # mouse_callbacks={
+                        #     "Button1": lambda qtile: qtile.cmd_spawn(PWA.calendar())},
+                        format=" %a, %B %d |  %H:%M ",
+                        ),
+                widget.TextBox(
+                        text=' ',
+                        mouse_callbacks={'Button1': lazy.spawn(
+                            "rofi -show powermenu -theme powermenu -modi powermenu:' \
+                                    rofi-power-menu --choices=lockscreen/logout/suspend/reboot/shutdown'")},
+                        padding=6,
+                        fontsize=widget_defaults['fontsize'] + 2,
+                        ),
+                ]
 
 bar_defaults = {'size': 28,}
 
