@@ -60,6 +60,7 @@ keys = [
     Key([mod, "control"], "q", lazy.shutdown()),
     Key([mod, "control", "shift"], "return", lazy.spawn("virtual-monitor $(xrandr --listactivemonitors | grep -m1 0 | grep -o '[^ ]*$')")),
     # Applications
+    Key([mod], "f", lazy.spawn("rofi -show >:~/.local/share/rofi/finder.sh")),
     Key([mod], "r", lazy.spawn("rofi -show run -display-run '> '")),
     Key([mod], "return", rofi_cmd()),    
     Key([mod, "control"], "d", lazy.spawn(dev_env)),
