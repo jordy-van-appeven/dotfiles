@@ -12,8 +12,8 @@ from libqtile.utils import guess_terminal
 mod = "mod4"
 alt = "mod1"
 terminal = guess_terminal()
-#file_manager = "nautilus --new-window "
-file_manager = terminal + " --command vifm"
+file_manager = "nautilus --new-window "
+#file_manager = terminal + " --command vifm"
 browser = "chromium --new-window"
 dev_env = terminal + " --command vim"
 
