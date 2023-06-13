@@ -29,7 +29,7 @@ set expandtab
 set nobackup
 
 " Do not let cursor scroll below or above N number of lines when scrolling.
-set scrolloff=10
+set scrolloff=0
 
 " Do not wrap lines. Allow long lines to extend as far as the line goes.
 set nowrap
@@ -116,4 +116,7 @@ command Fmt :TabVifm<CR>
 " colorizer plugin
 let g:colorizer_auto_color = 1
 let g:colorizer_colornames = 0
+
+" commentary plugin
+autocmd FileType C,c,cc,cpp,c++,cxx,H,h,hh,hpp,h++,hxx setlocal commentstring=//\ %s
 

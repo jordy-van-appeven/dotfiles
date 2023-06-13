@@ -13,6 +13,13 @@ $ sudo apt install vim-gtk
 $ git clone https://github.com/chrisbra/Colorizer.git ~/.vim/pack/start/Colorizer
 $ vim ~/.vim/pack/plugins/start/Colorizer/Colorizer.vmb -c ":so %"
 ```
+#### commentary
+```shell
+$ mkdir -p ~/.vim/pack/tpope/start
+$ cd ~/.vim/pack/tpope/start
+$ git clone https://tpope.io/vim/commentary.git
+$ vim -u NONE -c "helptags commentary/doc" -c q
+```
 
 #### fugitive
 ```shell
