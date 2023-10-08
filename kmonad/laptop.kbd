@@ -1,0 +1,72 @@
+(defcfg
+  ;; For Linux
+  input  (device-file "/dev/input/by-path/platform-i8042-serio-0-event-kbd")
+  output (uinput-sink "KMonad output")
+ 
+  ;; This option tells KMonad to let non-configured keys act normal
+  fallthrough true
+)
+
+(defsrc
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lmet lalt           spc            ralt rmet rctl
+)
+
+
+(defalias
+  nom  (layer-switch qwerty)
+  nav  (layer-toggle navigation) 
+  ntr  (layer-switch neutral) 
+  num  (layer-switch numbers) 
+
+  g_nav (tap-hold-next-release 200 g @nav)
+  h_ntr (tap-hold 200 h @ntr)
+  caps_nom (tap-hold 200 caps @nom)
+  esc_caps (tap-hold 200 esc caps)
+
+  a_met (tap-hold-next-release 200 a lmet)
+  s_alt (tap-hold-next-release 200 s lalt)
+  d_ctl (tap-hold-next-release 200 d lctl)
+  f_sft (tap-hold-next-release 200 f lsft)
+
+  j_sft (tap-hold-next-release 200 j rsft)
+  k_ctl (tap-hold-next-release 200 k rctl)
+  l_alt (tap-hold-next-release 200 l ralt)
+  ;_met (tap-hold-next-release 200 ; lmet)
+)
+
+(deflayer qwerty
+  grv  1    2      3      4      5         6    7        8       9      0    -    =    bspc
+  tab  q    w      e      r      t         y    u        i       o      p    [    ]    \
+  @esc_caps @a_met @s_alt @d_ctl @f_sft  @g_nav    @h_ntr        @j_sft  @k_ctl @l_alt @;_met  '    ret
+  lsft      z      x      c      v         b    n        m       ,      .         /    rsft
+  lctl lmet lalt           spc            ralt rmet rctl 
+)
+
+(deflayer navigation
+  _    _    _    _    _    _    _    _    _    _     _    _    _    del
+  _    _    _    _    _    _    _    home pgdn pgup  end  _    _    _
+  @nom _    _    _    _    _    left down up   right _    _    ret
+  lsft _    _    _    _    _    _    _    _    _     _    rsft
+  lctl lmet lalt           spc            ralt rmet rctl 
+)
+
+(deflayer neutral
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  @caps_nom a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lmet lalt           spc            ralt rmet rctl
+)
+
+(deflayer numbers
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  1    2    3    4    5    6    7    8    9    0    [    ]    \
+  @nom $    +    \(    \)    @    |    -    =    \_    *    '    ret
+  lsft !    #    {    }    ~    &    [    ]    %    ^    rsft
+  lctl lmet lalt           spc            ralt rmet rctl 
+)
+
