@@ -18,9 +18,16 @@ $ sudo update-alternatives --config x-terminal-emulator
 
 ## Theme
 
-Open `alacritty.yml`, add import tag and specify `yml` theme file.
+Open `alacritty.yml`, add import tag and uncomment one of the `yml` theme files (see example below).
 
 ```vim
 import:
   - dracula.yml
 ```
+
+For a 'catppuccin' theme, execute the following command:
+
+```shell
+$ git clone https://github.com/catppuccin/alacritty.git ~/.config/alacritty/catppuccin
+```
+

@@ -59,10 +59,17 @@ set hlsearch
 " Set the commands to save in history default number is 20.
 set history=1000
 
-" Enable Dracula theme
-packadd! dracula
-syntax enable
-colorscheme dracula
+" Themes
+
+" Dracula
+"packadd! dracula
+"syntax enable
+"colorscheme dracula
+"let g:lightline = {'colorscheme': 'dracula'}
+
+" Catppuccin
+colorscheme catppuccin_mocha
+let g:lightline = {'colorscheme': 'catppuccin_mocha'}
 
 " Clear highlighting on escape in normal mode
 nnoremap <esc> :let @/ = ""<return><esc>
@@ -102,9 +109,6 @@ endfunction
 " lightline plugin
 set laststatus=2
 set noshowmode
-let g:lightline = {
-            \ 'colorscheme': 'dracula',
-            \ }
 
 " vifm plugin
 command Fm :Vifm<CR>

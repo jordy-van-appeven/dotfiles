@@ -54,10 +54,23 @@ $ git clone https://github.com/pedsm/sprint.git ~/.vim/pack/plugins/start/sprint
 $ git clone https://github.com/vifm/vifm.vim.git ~/.vim/pack/plugins/start/vifm
 ```
 
-### Dracula theme
+### Theme
+
+Within 'dotfiles/vim/vimrc', under 'Themes' comment out the desired theme.
+
+#### Dracula
 
 ```shell
 $ mkdir -p ~/.vim/pack/themes/start
 
 $ git clone https://github.com/dracula/vim.git ~/.vim/pack/themes/start/dracula
 ```
+
+#### Catppuccin
+
+Make sure to initialize 'catppuccin' submodule:
+
+```shell
+$ git submodule update --recursive --init
+```
+
