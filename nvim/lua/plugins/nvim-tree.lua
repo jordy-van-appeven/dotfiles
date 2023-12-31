@@ -10,6 +10,9 @@ return {
                     quit_on_open = true,
                 },
             },
+            filters = {
+                git_ignored = false,
+            }
         })
         vim.keymap.set("n", "<M-1>", "<cmd>NvimTreeFindFileToggle<CR>")
     end
