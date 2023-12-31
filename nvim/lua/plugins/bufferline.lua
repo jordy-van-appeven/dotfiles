@@ -4,6 +4,7 @@ return {
     version = "*",
     -- https://github.com/catppuccin/nvim#special-integrations:~:text=bufferline.nvim-,Special,-coc.nvim
     after = "catppuccin",
+    enabled = false,
     config = function()
         require("bufferline").setup {
 
