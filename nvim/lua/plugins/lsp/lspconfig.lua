@@ -6,15 +6,11 @@ return {
         { "antosha417/nvim-lsp-file-operations", config = true },
     },
     config = function()
-        local lspconfig = require("lspconfig")
-
-        local cmp_nvim_lsp = require("cmp_nvim_lsp")
-
-        local opts = { noremap = true, silent = true }
         local on_attach = function(client, bufnr)
+            local opts = { noremap = true, silent = true }
             opts.buffer = bufnr
 
-            -- set keybinds
+            -- Set keybinds
             opts.desc = "Show LSP references"
             vim.keymap.set("n", "gr", "<cmd>Telescope lsp_references<CR>", opts)
 
@@ -49,7 +45,7 @@ return {
             vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
 
             opts.desc = "Show signature info popup"
-            vim.keymap.set("n", "gh", vim.lsp.buf.signature_help, opts)
+            vim.keymap.set({ "n", "i" }, "<C-space>", vim.lsp.buf.signature_help, opts)
 
             opts.desc = "Show documentation for what is under cursor"
             vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
@@ -62,28 +58,62 @@ return {
             vim.keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts)
         end
 
+        -- Diagnostics
+        vim.diagnostic.config({
+            float = {
+                border = 'rounded',
+                source = 'always',
+            },
+            severity_sort = true,
+            signs = true,
+            underline = false,
+            update_in_insert = true,
+            virtual_text = false,
+        })
+
         -- Change the Diagnostic symbols in the sign column (gutter)
-        local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
-        for type, icon in pairs(signs) do
-            local hl = "DiagnosticSign" .. type
-            vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+        local sign = function(opts)
+            vim.fn.sign_define(opts.name, {
+                texthl = opts.name,
+                text = opts.text,
+                numhl = ''
+            })
         end
 
-        -- used to enable autocompletion (assign to every lsp server config)
+        sign({ name = 'DiagnosticSignError', text = " " })
+        sign({ name = 'DiagnosticSignWarn', text = " " })
+        sign({ name = 'DiagnosticSignHint', text = "󰠠 " })
+        sign({ name = 'DiagnosticSignInfo', text = " " })
+
+        -- Set borders
+        vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
+            vim.lsp.handlers.hover,
+            { border = 'rounded' }
+        )
+
+        vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(
+            vim.lsp.handlers.signature_help,
+            { border = 'rounded' }
+        )
+
+        -- Used to enable autocompletion (assign to every lsp server config)
+        local cmp_nvim_lsp = require("cmp_nvim_lsp")
         local capabilities = cmp_nvim_lsp.default_capabilities()
 
-        -- configure lua server (with special settings)
+        -- Set LSP servers
+        local lspconfig = require("lspconfig")
+        -- Configure lua server (with special settings)
         lspconfig["lua_ls"].setup({
             capabilities = capabilities,
             on_attach = on_attach,
-            settings = { -- custom settings for lua
+            settings = { -- Custom settings for lua
                 Lua = {
-                    -- make the language server recognize "vim" global
+                    -- Make the language server recognize "vim" global
                     diagnostics = {
                         globals = { "vim" },
                     },
                     workspace = {
-                        -- make language server aware of runtime files
+                        -- Make language server aware of runtime files
                         library = {
                             [vim.fn.expand("$VIMRUNTIME/lua")] = true,
                             [vim.fn.stdpath("config") .. "/lua"] = true,

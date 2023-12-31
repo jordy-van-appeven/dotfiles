@@ -7,7 +7,7 @@ return {
         local treesitter = require("nvim-treesitter.configs")
 
         treesitter.setup({
-            ensure_installed = { "c", "lua", "vim", "vimdoc", "query" },
+            ensure_installed = { "c", "jsonc", "lua", "vim", "vimdoc", "query" },
 
             highlight = {
                 enable = true,
