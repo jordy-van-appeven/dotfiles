@@ -41,3 +41,10 @@ vim.cmd("set foldopen-=hor")
 
 -- Disable 'swapfile'
 vim.opt.swapfile = false
+
+-- Add filetype(s)
+vim.filetype.add({
+    extension = {
+        tpp = "cpp"
+    }
+})

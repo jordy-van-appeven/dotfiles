@@ -102,6 +102,23 @@ return {
 
         -- Set LSP servers
         local lspconfig = require("lspconfig")
+
+        lspconfig["bashls"].setup({
+            capabilities = capabilities,
+            on_attach = on_attach,
+        })
+
+        lspconfig["clangd"].setup({
+            capabilities = capabilities,
+            on_attach = on_attach,
+            filetypes = { "c", "cpp", "tpp", "objc", "objcpp", "cuda", "proto" },
+        })
+
+        lspconfig["cmake"].setup({
+            capabilities = capabilities,
+            on_attach = on_attach,
+        })
+
         -- Configure lua server (with special settings)
         lspconfig["lua_ls"].setup({
             capabilities = capabilities,
@@ -122,5 +139,11 @@ return {
                 },
             },
         })
+
+        lspconfig["pyright"].setup({
+            capabilities = capabilities,
+            on_attach = on_attach,
+        })
+
     end,
 }
