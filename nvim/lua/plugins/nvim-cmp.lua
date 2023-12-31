@@ -42,6 +42,24 @@ return {
                 { name = "nvim_lsp" },
                 { name = "luasnip" },
             }),
+            window = {
+                completion = cmp.config.window.bordered(),
+                documentation = cmp.config.window.bordered(),
+            },
+            formatting = {
+                fields = { 'abbr', 'menu', 'kind' },
+                format = function(entry, item)
+                    local menu_icon = {
+                        nvim_lsp = 'λ',
+                        luasnip = '⋗',
+                        buffer = 'Ω',
+                        path = '🖫',
+                    }
+
+                    item.kind = menu_icon[entry.source.name]
+                    return item
+                end,
+            },
         })
 
         -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
