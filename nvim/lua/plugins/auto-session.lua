@@ -1,6 +1,7 @@
 return {
     "rmagatti/auto-session",
-    after = "telescope",
+    dependencies = { "nvim-telescope/telescope.nvim", },
+    enabled = false,
     config = function()
         require("auto-session").setup {
             log_level = vim.log.levels.ERROR,
