@@ -14,6 +14,7 @@ return {
                 "bashls",
                 "cmake",
                 "clangd",
+                "jsonls",
                 "lua_ls",
                 "pyright",
             },
