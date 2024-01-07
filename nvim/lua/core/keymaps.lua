@@ -15,3 +15,4 @@ vim.keymap.set("n", "<leader>tp", ":tabp<CR>", { desc = "Go to previous tab" })
 vim.keymap.set("n", "<leader>tf", "<C-w>T", { desc = "Move current buffer to new tab" })
 
 vim.keymap.set("c", "<M-BS>", "<C-w>", { desc = "Delete 'word'" })
+vim.keymap.set("t", "<ESC>", "<C-\\><C-n>", { desc = "Return to normal mode" })
