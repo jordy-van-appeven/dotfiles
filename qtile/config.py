@@ -15,7 +15,7 @@ terminal = guess_terminal()
 file_manager = "nautilus --new-window "
 #file_manager = terminal + " --command vifm"
 browser = "chromium --new-window"
-dev_env = terminal + " --command vim"
+dev_env = str(terminal) + " --command vim"
 
 from theme import dracula
 theme = dracula
@@ -57,14 +57,14 @@ keys = [
     # Qtile
     Key([mod, "control"], "w", lazy.window.kill()),
     Key([mod, "control"], "r", lazy.reload_config()),
-    Key([mod, "control"], "q", lazy.shutdown()),
+    Key([mod, alt], "q", lazy.shutdown()),
     Key([mod, "control", "shift"], "return", lazy.spawn("virtual-monitor $(xrandr --listactivemonitors | grep -m1 0 | grep -o '[^ ]*$')")),
     # Applications
     Key([mod], "f", lazy.spawn("rofi -show >:~/.local/share/rofi/finder.sh")),
     Key([mod], "r", lazy.spawn("rofi -show run -display-run '> '")),
     Key([mod], "return", rofi_cmd()),    
     Key([mod, "control"], "d", lazy.spawn(dev_env)),
-    Key([mod, "control"], "t", lazy.spawn(terminal + " --command tmux new -As0; choose-tree")),
+    Key([mod, "control"], "t", lazy.spawn(str(terminal) + " --command tmux new -As0; choose-tree")),
     Key([mod, "control"], "b", lazy.spawn(browser + " --restore-last-session")),
     Key([mod, "control"], "e", lazy.spawn(file_manager)),
     Key([mod, "control"], "v", lazy.spawn(browser + " http://youtube.com")),
