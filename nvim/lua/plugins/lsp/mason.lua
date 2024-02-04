@@ -12,11 +12,13 @@ return {
         mason_lspconfig.setup({
             ensure_installed = {
                 "bashls",
-                "cmake",
+                "cmake@0.1.5",
                 "clangd",
+                "dockerls",
                 "jsonls",
                 "lua_ls",
                 "pyright",
+                "yamlls",
             },
             automatic_installation = true,
         })

@@ -127,6 +127,11 @@ local lsp_config = function()
         on_attach = on_attach,
     })
 
+    lspconfig["dockerls"].setup({
+        capabilities = capabilities,
+        on_attach = on_attach,
+    })
+
     lspconfig["jsonls"].setup({
         capabilities = capabilities,
         on_attach = on_attach,
@@ -165,6 +170,11 @@ local lsp_config = function()
                 }
             }
         },
+    })
+
+    lspconfig["yamlls"].setup({
+        capabilities = capabilities,
+        on_attach = on_attach,
     })
 end
 return {
