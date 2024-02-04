@@ -1,5 +1,4 @@
 local cmake_tools_config = function()
-
     require("cmake-tools").setup {
         cmake_command = "cmake",                                          -- this is used to specify cmake command pathss
         ctest_command = "ctest",                                          -- this is used to specify ctest command path
@@ -11,14 +10,14 @@ local cmake_tools_config = function()
         --       ${kitGenerator}
         --       ${variant:xx}
         cmake_build_directory = "cmake-build-${variant:buildType}", -- this is used to specify generate directory for cmake, allows macro expansion, relative to vim.loop.cwd()
-        cmake_soft_link_compile_commands = true,       -- this will automatically make a soft link from compile commands file to project root dir
-        cmake_compile_commands_from_lsp = false,       -- this will automatically set compile commands file location using lsp, to use it, please set `cmake_soft_link_compile_commands` to false
-        cmake_kits_path = nil,                         -- this is used to specify global cmake kits path, see CMakeKits for detailed usage
+        cmake_soft_link_compile_commands = false,                   -- this will automatically make a soft link from compile commands file to project root dir
+        cmake_compile_commands_from_lsp = false,                    -- this will automatically set compile commands file location using lsp, to use it, please set `cmake_soft_link_compile_commands` to false
+        cmake_kits_path = nil,                                      -- this is used to specify global cmake kits path, see CMakeKits for detailed usage
         cmake_variants_message = {
-            short = { show = true },                   -- whether to show short message
-            long = { show = true, max_length = 40 },   -- whether to show long message
+            short = { show = true },                                -- whether to show short message
+            long = { show = true, max_length = 40 },                -- whether to show long message
         },
-        cmake_dap_configuration = {                    -- debug settings for cmake
+        cmake_dap_configuration = {                                 -- debug settings for cmake
             name = "cpp",
             type = "codelldb",
             request = "launch",
@@ -35,9 +34,10 @@ local cmake_tools_config = function()
                         strategy = {
                             "terminal",
                             direction = "horizontal",
-                            autos_croll = true,
+                            auto_scroll = true,
                             quit_on_exit = "success"
-                        }
+                        },
+                        components = { { "on_output_quickfix", items_only = true, open_on_match = false, tail = true }, "default" },
                     }, -- options to pass into the `overseer.new_task` command
                     on_new_task = function(task)
                         require("overseer").open(
@@ -56,7 +56,7 @@ local cmake_tools_config = function()
                         strategy = {
                             "terminal",
                             direction = "horizontal",
-                            autos_croll = true,
+                            auto_scroll = true,
                             quit_on_exit = "success"
                         }
                     },   -- options to pass into the `overseer.new_task` command
@@ -78,6 +78,7 @@ return {
     "Civitasv/cmake-tools.nvim",
     dependencies = {
         "nvim-lua/plenary.nvim",
+        "nvim-telescope/telescope.nvim",
         "stevearc/overseer.nvim"
     },
     config = cmake_tools_config,
