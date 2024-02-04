@@ -12,7 +12,11 @@ return {
             },
             filters = {
                 git_ignored = false,
-            }
+            },
+            view = {
+                adaptive_size = true,
+                centralize_selection = true,
+            },
         })
         vim.keymap.set("n", "<M-1>", "<cmd>NvimTreeFindFileToggle<CR>")
     end
