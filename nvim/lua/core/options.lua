@@ -8,6 +8,9 @@ vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.opt.autoindent = true
 
+-- Minimum number of lines visible above/below cursor
+vim.opt.scrolloff = 10
+
 -- Line wrapping
 vim.opt.wrap = false
 
@@ -30,7 +33,7 @@ vim.opt.laststatus = 3
 vim.opt.backspace = "indent,eol,start"
 
 -- Clipboard
-vim.opt.clipboard:append("unnamedplus")
+-- vim.opt.clipboard:append("unnamedplus")
 
 -- Split windows
 vim.opt.splitright = true
