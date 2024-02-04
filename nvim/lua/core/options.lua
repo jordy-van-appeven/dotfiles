@@ -39,8 +39,16 @@ vim.opt.splitbelow = true
 -- Keep all other default 'foldopen' entries ("block,mark,percent,quickfix,search,tag,undo")
 vim.cmd("set foldopen-=hor")
 
--- Disable 'swapfile'
-vim.opt.swapfile = false
+-- Keep 'swapfile' outside working directory
+vim.opt.swapfile = true
+vim.opt.directory = vim.fn.expand("~/.local/state/nvim/swap//")
+
+-- Also backup file before each write
+vim.opt.backup = true
+vim.opt.backupdir = vim.fn.expand("~/.local/state/nvim/backup//")
+
+-- Write undo-tree to disk
+vim.opt.undofile = true
 
 -- Add filetype(s)
 vim.filetype.add({
