@@ -2,6 +2,7 @@ return {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
+        "ghostbuster91/nvim-next",
         "hrsh7th/cmp-nvim-lsp",
         { "antosha417/nvim-lsp-file-operations", config = true },
     },
@@ -35,11 +36,15 @@ return {
             opts.desc = "Show line diagnostics"
             vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, opts)
 
-            opts.desc = "Go to previous diagnostic"
-            vim.keymap.set("n", "[e", vim.diagnostic.goto_prev, opts)
+            -- Diagnostics
+            local next_diagnostic = require("nvim-next.integrations").diagnostic()
 
-            opts.desc = "Go to next diagnostic"
-            vim.keymap.set("n", "]e", vim.diagnostic.goto_next, opts)
+            vim.keymap.set("n", "[d",
+                next_diagnostic.goto_prev({ severity = { min = vim.diagnostic.severity.HINT } }),
+                { desc = "previous diagnostic" })
+
+            vim.keymap.set("n", "]d", next_diagnostic.goto_next({ severity = { min = vim.diagnostic.severity.HINT } }),
+                { desc = "next diagnostic" })
 
             opts.desc = "See available code actions"
             vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)

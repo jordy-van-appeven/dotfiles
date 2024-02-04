@@ -1,11 +1,13 @@
-return {
-    "nvim-treesitter/nvim-treesitter-textobjects",
-    lazy = true,
-    config = function()
-        require("nvim-treesitter.configs").setup({
+local treesitter_textobjects_config = function()
+    -- First initialize intgration module
+    require("nvim-next.integrations").treesitter_textobjects()
+
+    -- Setup 'treesitter-textobjects'
+    require("nvim-treesitter.configs").setup({
+        nvim_next = {
+            enable = true,
             textobjects = {
                 select = {
-                    enable = true,
                     lookahead = true,
                     keymaps = {
                         -- You can use the capture groups defined in textobjects.scm
@@ -34,7 +36,6 @@ return {
                     },
                 },
                 swap = {
-                    enable = true,
                     swap_next = {
                         ["<leader>na"] = { query = "@parameter.inner", desc = "Swap parameters/argument with next" },
                         ["<leader>n:"] = { query = "@property.outer", desc = "Swap object property with next" },
@@ -47,7 +48,6 @@ return {
                     },
                 },
                 move = {
-                    enable = true,
                     set_jumps = true, -- whether to set jumps in the jumplist
                     goto_next_start = {
                         ["]f"] = { query = "@call.outer", desc = "Next function call start" },
@@ -87,18 +87,12 @@ return {
                     },
                 },
             },
-        })
+        },
+    })
+end
 
-        local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
-
-        -- vim way: ; goes to the direction you were moving.
-        vim.keymap.set({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move)
-        vim.keymap.set({ "n", "x", "o" }, ",", ts_repeat_move.repeat_last_move_opposite)
-
-        -- Optionally, make builtin f, F, t, T also repeatable with ; and ,
-        vim.keymap.set({ "n", "x", "o" }, "f", ts_repeat_move.builtin_f)
-        vim.keymap.set({ "n", "x", "o" }, "F", ts_repeat_move.builtin_F)
-        vim.keymap.set({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t)
-        vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T)
-    end,
+return {
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    lazy = true,
+    config = treesitter_textobjects_config,
 }
