@@ -1,11 +1,28 @@
 local nvim_dap_config = function()
-
     -- Keymaps
-    vim.keymap.set("n", "<leader>b", "<cmd>DapToggleBreakpoint<CR>")
+    vim.keymap.set("n", "<leader>db", "<cmd>DapToggleBreakpoint<CR>")
     vim.keymap.set("n", "<F5>", "<cmd>DapContinue<CR>")
     vim.keymap.set("n", "<F10>", "<cmd>DapStepOver<CR>")
     vim.keymap.set("n", "<F11>", "<cmd>DapStepInto<CR>")
     vim.keymap.set("n", "<F12>", "<cmd>DapStepOut<CR>")
+
+    -- Icons
+    vim.api.nvim_create_autocmd("ColorScheme", {
+        pattern = "*",
+        -- group = "UserDefLoadOnce",
+        desc = "Prevent colorscheme clearing custom DAP icon colors.",
+        callback = function()
+            vim.api.nvim_set_hl(0, 'DapBreakpoint', { ctermbg = 0, fg = '#993939' })
+            vim.api.nvim_set_hl(0, 'DapLogPoint', { ctermbg = 0, fg = '#61afef' })
+            vim.api.nvim_set_hl(0, 'DapStopped', { ctermbg = 0, fg = '#98c379' })
+        end
+    })
+
+    vim.fn.sign_define('DapBreakpoint', { text = '', texthl = 'DapBreakpoint' })
+    vim.fn.sign_define('DapBreakpointCondition', { text = 'ﳁ', texthl = 'DapBreakpoint' })
+    vim.fn.sign_define('DapBreakpointRejected', { text = '', texthl = 'DapBreakpoint' })
+    vim.fn.sign_define('DapLogPoint', { text = '', texthl = 'DapLogPoint' })
+    vim.fn.sign_define('DapStopped', { text = '', texthl = 'DapStopped' })
 
     local dap = require('dap')
 
