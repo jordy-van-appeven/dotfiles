@@ -24,6 +24,12 @@ local nvim_dap_config = function()
         }
     }
 
+    dap.adapters.lldb = {
+        type = 'executable',
+        command = '/usr/bin/lldb-dap-18', -- adjust as needed, must be absolute path
+        name = 'lldb'
+    }
+
     -- Python (Make sure to create virtual env at '~/.virtualenvs/debugpy/' and install 'debugpy' package)
     dap.adapters.python = function(cb, config)
         if config.request == 'attach' then
@@ -49,6 +55,9 @@ local nvim_dap_config = function()
                 },
             })
         end
+
+    require("dap.ext.vscode").load_launchjs(nil, {
+        lldb = { 'c', 'cpp' } })
     end
 end
 
