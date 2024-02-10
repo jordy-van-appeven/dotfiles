@@ -1,7 +1,9 @@
 return {
     'stevearc/overseer.nvim',
     opts = {},
-    dependencies = { "mfussenegger/nvim-dap", },
+    dependencies = {
+        "rcarriga/nvim-notify"
+    },
     config = function()
         require("overseer").setup({
             actions = {
@@ -36,12 +38,6 @@ return {
                 },
             },
         })
-
-        -- json decoder with support for JSON5 https://github.com/stevearc/overseer.nvim/blob/master/doc/third_party.md#dap
-        require("dap.ext.vscode").json_decode = require("overseer.json").decode
-
-        -- By default parses file from current working directory at '.vscode/launch.json'
-        require("dap.ext.vscode").load_launchjs()
 
         -- Keymaps
         vim.keymap.set("n", "<M-2>", "<cmd>OverseerRun <CR>")
