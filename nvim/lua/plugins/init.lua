@@ -1,5 +1,5 @@
 return {
-    "skywind3000/asyncrun.vim",
+    "hfn92/cmake-gtest.nvim",
     "tpope/vim-surround",
     "williamboman/mason.nvim",
 }
