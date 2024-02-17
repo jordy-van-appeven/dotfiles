@@ -39,6 +39,9 @@ return {
             },
         })
 
+        -- Miscellaneous 
+        vim.notify = require("notify")
+
         -- Keymaps
         vim.keymap.set("n", "<M-2>", "<cmd>OverseerRun <CR>")
         vim.keymap.set("n", "<M-3>", "<cmd>OverseerToggle! bottom<CR>")
