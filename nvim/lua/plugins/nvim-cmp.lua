@@ -24,8 +24,9 @@ local nvim_cmp_config = function()
         }),
         sources = cmp.config.sources({
             { name = "buffer" },
-            { name = "path" },
+            { name = "codeium"},
             { name = "nvim_lsp" },
+            { name = "path" },
             { name = "luasnip" },
         }),
         window = {
@@ -36,16 +37,18 @@ local nvim_cmp_config = function()
             fields = { 'abbr', 'menu', 'kind' },
             format = function(entry, item)
                 local menu_icon = {
-                    nvim_lsp = 'λ',
-                    luasnip = '⋗',
                     buffer = 'Ω',
+                    codeium = "",
+                    nvim_lsp = 'λ',
                     path = '🖫',
+                    luasnip = '⋗',
                 }
                 -- Source
                 item.kind = menu_icon[entry.source.name]
                 item.menu = ({
                     buffer = "[Buffer]",
-                    nvim_lsp = "[LSP]",
+                    codeium = "[Codeium]",
+                    nvim_lsp = "[Lsp]",
                     luasnip = "[LuaSnip]",
                     nvim_lua = "[Lua]",
                     latex_symbols = "[LaTeX]",
