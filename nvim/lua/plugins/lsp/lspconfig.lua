@@ -50,10 +50,11 @@ local lsp_config = function()
         opts.desc = "Show documentation for what is under cursor"
         vim.keymap.set({ "n", "i" }, "gi", vim.lsp.buf.hover, opts)
 
-        opts.desc = "Format file"
-        vim.keymap.set({ "n", "v" }, "<leader>gf", function()
-            vim.lsp.buf.format { async = true }
-        end, opts)
+        -- Formatting now done by 'conform.lua'
+        -- opts.desc = "Format file"
+        -- vim.keymap.set({ "n", "v" }, "<leader>gf", function()
+        --     vim.lsp.buf.format { async = true }
+        -- end, opts)
 
         opts.desc = "Restart LSP"
         vim.keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts)
