@@ -237,7 +237,7 @@ def get_widgets(primary=False):
                     ),
                 widget.Net(
                     prefix="M",
-                    format="{down} ↓↑ {up}",
+                    format="{down:.2f}{down_suffix} ↓↑ {up:.2f}{up_suffix}",
                     mouse_callbacks={'Button1': lazy.spawn(
                         'rofi-network-manager')},
                     ),
