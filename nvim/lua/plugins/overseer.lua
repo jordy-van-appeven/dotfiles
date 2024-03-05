@@ -10,8 +10,13 @@ return {
                 -- Disable built-in actions by setting them to 'false'
                 ["open tab"] = false,
             },
-            -- templates = { "builtin", "user.cpp_build", "user.python_script" },
-            templates = { "builtin" },
+			templates = {
+				"builtin",
+				"user.cpp_build",
+				"user.cpp_address_sanitizer",
+				"user.cpp_thread_sanitizer",
+				"user.cpp_undefined_sanitizer",
+			},
 
             task_list = {
                 default_detail = 1,
@@ -43,7 +48,7 @@ return {
         vim.notify = require("notify")
 
         -- Keymaps
-        vim.keymap.set("n", "<M-2>", "<cmd>OverseerRun <CR>")
-        vim.keymap.set("n", "<M-3>", "<cmd>OverseerToggle! bottom<CR>")
+        vim.keymap.set("n", "<M-2>", "<cmd>OverseerToggle bottom<CR>")
+        vim.keymap.set("n", "<M-3>", "<cmd>OverseerRun <CR>")
     end,
 }
