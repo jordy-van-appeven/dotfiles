@@ -1,4 +1,4 @@
-local lsp_config = function()
+local config_function = function()
     local on_attach = function(_, bufnr)
         local opts = { noremap = true, silent = true }
         opts.buffer = bufnr
@@ -29,7 +29,7 @@ local lsp_config = function()
         -- vim.keymap.set("n", "<leader>d", "<cmd>Telescope diagnostics bufnr=0<CR>", opts)
 
         opts.desc = "Show line diagnostics"
-        vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, opts)
+        vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
 
         -- Diagnostics
         local next_diagnostic = require("nvim-next.integrations").diagnostic()
@@ -48,7 +48,7 @@ local lsp_config = function()
         vim.keymap.set({ "n", "i" }, "<M-Space>", vim.lsp.buf.signature_help, opts)
 
         opts.desc = "Show documentation for what is under cursor"
-        vim.keymap.set({ "n", "i" }, "gi", vim.lsp.buf.hover, opts)
+        vim.keymap.set({ "n" }, "gi", vim.lsp.buf.hover, opts)
 
         -- Formatting now done by 'conform.lua'
         -- opts.desc = "Format file"
@@ -186,5 +186,5 @@ return {
         "hrsh7th/cmp-nvim-lsp",
         { "antosha417/nvim-lsp-file-operations", config = true },
     },
-    config = lsp_config,
+    config = config_function,
 }
