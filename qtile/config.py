@@ -64,7 +64,7 @@ keys = [
     Key([mod], "r", lazy.spawn("rofi -show run -display-run '> '")),
     Key([mod], "return", rofi_cmd()),    
     Key([mod, "control"], "d", lazy.spawn(dev_env)),
-    Key([mod, "control"], "t", lazy.spawn(str(terminal) + " --command tmux new -As0; choose-tree")),
+    Key([mod, "control"], "t", lazy.spawn(str(terminal) + " --command tmux new -Asworkspace; choose-tree -Zs")),
     Key([mod, "control"], "b", lazy.spawn(browser + " --restore-last-session")),
     Key([mod, "control"], "e", lazy.spawn(file_manager)),
     Key([mod, "control"], "v", lazy.spawn(browser + " http://youtube.com")),
