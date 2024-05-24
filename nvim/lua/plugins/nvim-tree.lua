@@ -8,14 +8,22 @@ return {
             actions = {
                 open_file = {
                     quit_on_open = true,
+                    window_picker = {
+                        enable = false,
+                    }
                 },
             },
             filters = {
                 git_ignored = false,
             },
+            git = {
+                enable = false,
+            },
             view = {
                 adaptive_size = true,
                 centralize_selection = true,
+                relativenumber = true,
+                signcolumn = "no",
             },
         })
         vim.keymap.set("n", "<M-1>", "<cmd>NvimTreeFindFileToggle<CR>")
