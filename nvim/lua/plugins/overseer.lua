@@ -49,6 +49,6 @@ return {
 
         -- Keymaps
         vim.keymap.set("n", "<M-2>", "<cmd>OverseerToggle bottom<CR>")
-        vim.keymap.set("n", "<M-3>", "<cmd>OverseerRun <CR>")
+        vim.keymap.set("n", "<M-3>", "<cmd>OverseerRun<CR>")
     end,
 }
