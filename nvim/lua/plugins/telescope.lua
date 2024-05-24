@@ -3,6 +3,7 @@ local nvim_telescope_config = function()
 
     telescope.setup({
         defaults = {
+            layout_strategy = "vertical",
             mappings = {
                 i = {
                 }
@@ -20,6 +21,7 @@ local nvim_telescope_config = function()
     vim.keymap.set("n", "<leader>fF",
         function()
             require("telescope.builtin").find_files({
+                follow = true,
                 hidden = true,
                 no_ignore = true
             })
@@ -50,7 +52,7 @@ end
 
 return {
     "nvim-telescope/telescope.nvim",
-    tag = '0.1.5',
+    tag = '0.1.6',
     dependencies = {
         "BurntSushi/ripgrep",
         "davvid/telescope-git-grep.nvim",
