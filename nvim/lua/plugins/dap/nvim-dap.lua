@@ -36,7 +36,20 @@ local nvim_dap_config = function()
 	vim.keymap.set("n", "<F11>", dap.step_into)
 	vim.keymap.set("n", "<F12>", dap.step_out)
 
-	dap.adapters.lldb = {
+	dap.adapters.codelldb = {
+		type = "server",
+		port = "${port}",
+		executable = {
+			-- CHANGE THIS to your path!
+			command = "/home/jordy/codelldb-x86_64-linux-1.10.0/extension/adapter/codelldb",
+			args = { "--port", "${port}" },
+
+			-- On windows you may have to uncomment this:
+			-- detached = false,
+		},
+	}
+
+    dap.adapters.lldb = {
 		type = "executable",
 		command = "/usr/bin/lldb-vscode-17", -- adjust as needed, must be absolute path
 		name = "lldb",
