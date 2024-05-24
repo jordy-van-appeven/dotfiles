@@ -29,7 +29,9 @@ local nvim_dap_config = function()
 	end
 
 	vim.keymap.set("n", "<leader>db", dap.toggle_breakpoint)
+	vim.keymap.set("n", "<F4>", dap.restart)
 	vim.keymap.set("n", "<F5>", continue)
+	vim.keymap.set("n", "<F6>", dap.terminate)
 	vim.keymap.set("n", "<F10>", dap.step_over)
 	vim.keymap.set("n", "<F11>", dap.step_into)
 	vim.keymap.set("n", "<F12>", dap.step_out)
