@@ -79,7 +79,8 @@ return {
     dependencies = {
         "nvim-lua/plenary.nvim",
         "nvim-telescope/telescope.nvim",
-        "stevearc/overseer.nvim"
+        "stevearc/overseer.nvim",
+        "ThePrimeagen/git-worktree.nvim",
     },
     config = cmake_tools_config,
 }
