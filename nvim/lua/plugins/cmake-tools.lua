@@ -11,7 +11,7 @@ local cmake_tools_config = function()
         --       ${variant:xx}
         cmake_build_directory = "cmake-build-${variant:buildType}", -- this is used to specify generate directory for cmake, allows macro expansion, relative to vim.loop.cwd()
         cmake_soft_link_compile_commands = false,                   -- this will automatically make a soft link from compile commands file to project root dir
-        cmake_compile_commands_from_lsp = true,                    -- this will automatically set compile commands file location using lsp, to use it, please set `cmake_soft_link_compile_commands` to false
+        cmake_compile_commands_from_lsp = true,                     -- this will automatically set compile commands file location using lsp, to use it, please set `cmake_soft_link_compile_commands` to false
         cmake_kits_path = nil,                                      -- this is used to specify global cmake kits path, see CMakeKits for detailed usage
         cmake_variants_message = {
             short = { show = true },                                -- whether to show short message
@@ -39,11 +39,11 @@ local cmake_tools_config = function()
                         },
                         components = { { "on_output_quickfix", items_only = true, open_on_match = false, tail = true }, "default" },
                     }, -- options to pass into the `overseer.new_task` command
-                    on_new_task = function(task)
-                        require("overseer").open(
-                            { enter = false, direction = "bottom" }
-                        )
-                    end, -- a function that gets overseer.Task when it is created, before calling `task:start`
+                    -- on_new_task = function(task)
+                    --     require("overseer").open(
+                    --         { enter = false, direction = "bottom" }
+                    --     )
+                    -- end, -- a function that gets overseer.Task when it is created, before calling `task:start`
                 },
             },
         },
@@ -72,6 +72,14 @@ local cmake_tools_config = function()
             refresh_rate_ms = 100, -- how often to iterate icons
         },
     }
+    -- Keymaps
+    vim.keymap.set("n", "<M-;>", "<cmd>CMakeSelectConfigurePreset<CR>")
+    vim.keymap.set("n", "<M-4>", "<cmd>CMakeSelectBuildPreset<CR>")
+    vim.keymap.set("n", "<M-5>", "<cmd>CMakeSelectBuildTarget<CR>")
+    vim.keymap.set("n", "<M-6>", "<cmd>CMakeBuild<CR>")
+    vim.keymap.set("n", "<M-[>", "<cmd>CMakeSelectLaunchTarget<CR>")
+    vim.keymap.set("n", "<M-7>", "<cmd>CMakeLaunchArgs<CR>")
+    vim.keymap.set("n", "<M-8>", "<cmd>CMakeRun<CR>")
 end
 
 return {
