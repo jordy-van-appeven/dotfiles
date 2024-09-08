@@ -3,9 +3,13 @@ local config_function = function()
         local opts = { noremap = true, silent = true }
         opts.buffer = bufnr
 
-        -- Set keybinds
-        opts.desc = "Show LSP references"
-        vim.keymap.set("n", "gr", "<cmd>Telescope lsp_references<CR>", opts)
+		-- Set keybinds
+		opts.desc = "Show LSP references"
+        vim.keymap.set("n", "gr", function()
+			require("telescope.builtin").lsp_references({
+				show_line = false,
+			})
+        end, opts)
 
         opts.desc = "Go to declaration"
         vim.keymap.set("n", "gd", vim.lsp.buf.declaration, opts)
