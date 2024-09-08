@@ -17,31 +17,31 @@ local nvim_telescope_config = function()
     -- Key mappings
 
     -- Search filename
+    local builtin = require("telescope.builtin")
     vim.keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<CR>", { desc = "Find files in current directory" })
-    vim.keymap.set("n", "<leader>fF",
-        function()
-            require("telescope.builtin").find_files({
-                follow = true,
-                hidden = true,
-                no_ignore = true
-            })
-        end, { desc = "Find files in current directory, including hidden- and '.gitignore' files" })
-    vim.keymap.set("n", "<leader>fr", "<cmd>Telescope oldfiles<CR>", { desc = "Find recent files" })
+	vim.keymap.set("n", "<leader>fF", function()
+		builtin.find_files({
+			follow = true,
+			hidden = true,
+			no_ignore = true,
+		})
+	end, { desc = "Find files in current directory, including hidden- and '.gitignore' files" })
+	vim.keymap.set("n", "<leader>fr", function()
+		builtin.oldfiles({ only_cwd = true })
+	end, { desc = "Find recent files" })
 
     -- Search string
     vim.keymap.set("n", "<leader>fa", "<cmd>Telescope live_grep<CR>", { desc = "Find string in current directory" })
     vim.keymap.set("n", "<leader>fc", "<cmd>Telescope grep_string<CR>",
         { desc = "Find word under cursor in project through global search" })
 
-    -- Search project
-    vim.keymap.set("n", "<leader>fp",
-        function()
-            require("telescope.builtin").git_files({
-                recurse_submodules = true,
-            })
-        end, { desc = "Find files in git project" })
-    vim.keymap.set("n", "<leader>fP", "<cmd>Telescope git_grep live_grep<CR>",
-        { desc = "Find string in git project" })
+	-- Search project
+	vim.keymap.set("n", "<leader>fp", function()
+		builtin.git_files({
+			recurse_submodules = true,
+		})
+	end, { desc = "Find files in git project" })
+	vim.keymap.set("n", "<leader>fP", "<cmd>Telescope git_grep live_grep<CR>", { desc = "Find string in git project" })
 
     -- Misc.
     vim.keymap.set("n", "<leader>fb", "<cmd>Telescope git_branches<CR>", { desc = "Find git branches" })
