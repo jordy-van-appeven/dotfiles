@@ -1,23 +1,23 @@
 local nvim_dap_config = function()
-    -- Icons
-    vim.api.nvim_create_autocmd("ColorScheme", {
-        pattern = "*",
-        -- group = "UserDefLoadOnce",
-        desc = "Prevent colorscheme clearing custom DAP icon colors.",
-        callback = function()
-            vim.api.nvim_set_hl(0, 'DapBreakpoint', { ctermbg = 0, fg = '#993939' })
-            vim.api.nvim_set_hl(0, 'DapLogPoint', { ctermbg = 0, fg = '#61afef' })
-            vim.api.nvim_set_hl(0, 'DapStopped', { ctermbg = 0, fg = '#98c379' })
-        end
-    })
+	-- Icons
+	vim.api.nvim_create_autocmd("ColorScheme", {
+		pattern = "*",
+		-- group = "UserDefLoadOnce",
+		desc = "Prevent colorscheme clearing custom DAP icon colors.",
+		callback = function()
+			vim.api.nvim_set_hl(0, "DapBreakpoint", { ctermbg = 0, fg = "#993939" })
+			vim.api.nvim_set_hl(0, "DapLogPoint", { ctermbg = 0, fg = "#61afef" })
+			vim.api.nvim_set_hl(0, "DapStopped", { ctermbg = 0, fg = "#98c379" })
+		end,
+	})
 
-    vim.fn.sign_define('DapBreakpoint', { text = '', texthl = 'DapBreakpoint' })
-    vim.fn.sign_define('DapBreakpointCondition', { text = 'ﳁ', texthl = 'DapBreakpoint' })
-    vim.fn.sign_define('DapBreakpointRejected', { text = '', texthl = 'DapBreakpoint' })
-    vim.fn.sign_define('DapLogPoint', { text = '', texthl = 'DapLogPoint' })
-    vim.fn.sign_define('DapStopped', { text = '', texthl = 'DapStopped' })
+	vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "DapBreakpoint" })
+	vim.fn.sign_define("DapBreakpointCondition", { text = "ﳁ", texthl = "DapBreakpoint" })
+	vim.fn.sign_define("DapBreakpointRejected", { text = "", texthl = "DapBreakpoint" })
+	vim.fn.sign_define("DapLogPoint", { text = "", texthl = "DapLogPoint" })
+	vim.fn.sign_define("DapStopped", { text = "", texthl = "DapStopped" })
 
-    local dap = require('dap')
+	local dap = require("dap")
 
 	-- Keymaps
 	local continue = function()
@@ -28,7 +28,13 @@ local nvim_dap_config = function()
 		dap.continue()
 	end
 
+	local send_to_repl = function()
+		local lines = vim.fn.getregion(vim.fn.getpos("."), vim.fn.getpos("v"))
+		dap.repl.execute(table.concat(lines, "\n"))
+	end
+
 	vim.keymap.set("n", "<leader>db", dap.toggle_breakpoint)
+	vim.keymap.set("x", "<leader>dr", send_to_repl)
 	vim.keymap.set("n", "<F4>", dap.restart)
 	vim.keymap.set("n", "<F5>", continue)
 	vim.keymap.set("n", "<F6>", dap.terminate)
@@ -49,14 +55,14 @@ local nvim_dap_config = function()
 		},
 	}
 
-    dap.adapters.lldb = {
+	dap.adapters.lldb = {
 		type = "executable",
 		command = "/usr/bin/lldb-vscode-17", -- adjust as needed, must be absolute path
 		name = "lldb",
 	}
 
-    -- Python (Make sure to create virtual env at '~/.virtualenvs/debugpy/' and install 'debugpy' package)
-    dap.adapters.python = function(cb, config)
+	-- Python (Make sure to create virtual env at '~/.virtualenvs/debugpy/' and install 'debugpy' package)
+	dap.adapters.python = function(cb, config)
 		if config.request == "attach" then
 			---@diagnostic disable-next-line: undefined-field
 			local port = (config.connect or config).port
@@ -81,16 +87,15 @@ local nvim_dap_config = function()
 			})
 		end
 
-        -- json decoder with support for JSON5 https://github.com/stevearc/overseer.nvim/blob/master/doc/third_party.md#dap
-        require("dap.ext.vscode").json_decode = require("overseer.json").decode
-
-    end
+		-- json decoder with support for JSON5 https://github.com/stevearc/overseer.nvim/blob/master/doc/third_party.md#dap
+		require("dap.ext.vscode").json_decode = require("overseer.json").decode
+	end
 end
 
 return {
-    "mfussenegger/nvim-dap",
-    config = nvim_dap_config,
-    dependencies = {
-        "stevearc/overseer.nvim"
-    },
+	"mfussenegger/nvim-dap",
+	config = nvim_dap_config,
+	dependencies = {
+		"stevearc/overseer.nvim",
+	},
 }
