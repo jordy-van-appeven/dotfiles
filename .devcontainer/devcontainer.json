@@ -1,0 +1,7 @@
+{
+  "name": "Ubuntu 20.04 devcontainer",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "onCreateCommand": "/bin/sh .devcontainer/onCreateCommand.sh"
+}
