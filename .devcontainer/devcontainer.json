@@ -3,5 +3,12 @@
   "build": {
     "dockerfile": "Dockerfile"
   },
+  "containerEnv": {
+    "DISPLAY": "${localEnv:DISPLAY}"
+  },
+  "mounts": [
+    "source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind,rslave",
+    "source=/home/${localEnv:USER}/.Xauthority,target=/root/.Xauthority,type=bind,readonly"
+  ],
   "onCreateCommand": "/bin/sh .devcontainer/onCreateCommand.sh"
 }

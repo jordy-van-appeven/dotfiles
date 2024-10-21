@@ -7,6 +7,7 @@ sudo apt install -y build-essential \
     gpg \
     openssh-client \
     wget \
+    xclip
 
 # Add Kitware APT repository (https://apt.kitware.com/)
 test -f /usr/share/doc/kitware-archive-keyring/copyright \
