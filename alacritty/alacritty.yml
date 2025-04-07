@@ -9,8 +9,8 @@
 # All imports must either be absolute paths starting with `/`, or paths relative
 # to the user's home directory starting with `~/`.
 import:
-  # - ~/.config/alacritty/catppuccin/catppuccin-mocha.yml
- - ~/.config/alacritty/catppuccin/catppuccin-macchiato.yml
+  - ~/.config/alacritty/catppuccin/catppuccin-mocha.yml
+# - ~/.config/alacritty/catppuccin/catppuccin-macchiato.yml
 #  - ~/.config/alacritty/catppuccin/catppuccin-frappe.yml
 #  - ~/.config/alacritty/catppuccin/catppuccin-latte.yml
 #  - ~/.config/alacritty/dracula.yml
@@ -114,15 +114,25 @@ window:
 
 # Font configuration
 font:
-  # Normal (roman) font face
   normal:
+    family: MartianMono Nerd Font
+  bold:
+    family: MartianMono Nerd Font
+    style: Bold
+  italic:
+    family: MartianMono Nerd Font
+    style: MediumItalic
+  bold_italic:
+    family: MartianMono Nerd Font
+    style: BoldItalic
+
+  # Normal (roman) font face
     # Font family
     #
     # Default:
     #   - (macOS) Menlo
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
-    family: JetBrainsMono Nerd Font
 
     # The `style` can be specified to pick a specific face.
     #style: Regular

@@ -17,8 +17,7 @@ file_manager = "nautilus --new-window "
 browser = "chromium --new-window"
 dev_env = str(terminal) + " --command vim"
 
-from theme import dracula
-theme = dracula
+from theme import theme
 
 rofi_cmd = lazy.spawn("rofi -show drun -display-drun '> '")
 
@@ -110,8 +109,8 @@ for group in groups:
         ]
     )
 
-layout_default = {"border_width": 2, "margin": 0,
-                  "border_focus": theme["active"], "border_normal": "#1D2330"}
+layout_default = {"border_width": 3, "margin": 0,
+                  "border_focus": theme["inactive"], "border_normal": "#222436"}
 
 layouts = [
     # layout.Bsp(),
@@ -147,7 +146,7 @@ layouts = [
 ]
 
 widget_defaults = dict(
-    font='Ubuntu Nerd Font',
+    font='MartianMono Nerd Font',
     fontsize=15,
     padding=4,
     foreground=theme["widget_foreground"],
@@ -169,7 +168,7 @@ def get_widgets(primary=False):
                 }
             ),
             widget.GroupBox(
-                font="Ubuntu Nerd Font",
+                font="MartianMono Nerd Font",
                 fontsize=widget_defaults['fontsize'] + 1,
                 margin_y=4,
                 margin_x=0,
@@ -314,7 +313,7 @@ mouse = [
 ]
 
 groups.extend([ScratchPad("terminal", [
-    DropDown("terminal", terminal, x=0.0, y=0.28, width=0.998, height=0.75, opacity=1.0)])])
+    DropDown("terminal", terminal, x=0.0, y=0.0, width=0.998, height=0.998, opacity=0.95)])])
 
 keys.extend([Key([mod, "control"], "return", lazy.group["terminal"].dropdown_toggle("terminal")),
              ])
