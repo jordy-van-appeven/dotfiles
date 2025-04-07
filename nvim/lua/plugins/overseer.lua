@@ -13,9 +13,13 @@ return {
 			templates = {
 				"builtin",
 				"user.cpp_build",
+				"user.cpp_build_and_run",
 				"user.cpp_address_sanitizer",
+				"user.cpp_address_sanitizer_and_run",
 				"user.cpp_thread_sanitizer",
+				"user.cpp_thread_sanitizer_and_run",
 				"user.cpp_undefined_sanitizer",
+				"user.cpp_undefined_sanitizer_and_run",
 			},
 
             task_list = {
