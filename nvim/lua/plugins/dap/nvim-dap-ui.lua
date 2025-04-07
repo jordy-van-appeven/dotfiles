@@ -62,6 +62,8 @@ local nvim_dap_ui_config = function()
 	end
 
 	-- Keymaps
+	vim.keymap.set("n", "<leader>de", dapui.eval)
+	vim.keymap.set("n", "<leader>df", dapui.float_element)
 	vim.keymap.set("n", "<leader>dt", dapui.toggle)
 end
 
