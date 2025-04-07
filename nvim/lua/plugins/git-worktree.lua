@@ -4,6 +4,9 @@ local config_function = function()
     worktree.setup()
     worktree.on_tree_change(function(operation, metadata)
         if operation == worktree.Operations.Switch then
+            if metadata.path == metadata.prev_path then
+                return
+            end
             -- Close all unmodified buffers
             -- vim.cmd("bufdo if !&modified | bd | endif")
             -- require("lazy").reload({
