@@ -142,6 +142,17 @@ local config_function = function()
         on_attach = on_attach,
     })
 
+	lspconfig["julials"].setup({
+		capabilities = capabilities,
+		on_attach = on_attach,
+		on_new_config = function(new_config, _)
+			local julia = vim.fn.expand("~/.julia/environments/nvim-lspconfig/bin/julia")
+			if require("lspconfig").util.path.is_file(julia) then
+				new_config.cmd[1] = julia
+			end
+		end,
+	})
+
     -- Configure lua server (with special settings)
     lspconfig["lua_ls"].setup({
         capabilities = capabilities,

@@ -42,6 +42,7 @@ local nvim_dap_config = function()
 	vim.keymap.set("n", "<F11>", dap.step_into)
 	vim.keymap.set("n", "<F12>", dap.step_out)
 
+    -- C++
 	dap.adapters.codelldb = {
 		type = "server",
 		port = "${port}",
@@ -60,6 +61,9 @@ local nvim_dap_config = function()
 		command = "/usr/bin/lldb-vscode-17", -- adjust as needed, must be absolute path
 		name = "lldb",
 	}
+
+    -- Julia
+    require("nvim-dap-julia").setup()
 
 	-- Python (Make sure to create virtual env at '~/.virtualenvs/debugpy/' and install 'debugpy' package)
 	dap.adapters.python = function(cb, config)
@@ -97,5 +101,6 @@ return {
 	config = nvim_dap_config,
 	dependencies = {
 		"stevearc/overseer.nvim",
+		"kdheepak/nvim-dap-julia",
 	},
 }
