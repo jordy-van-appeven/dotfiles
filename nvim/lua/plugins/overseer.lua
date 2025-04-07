@@ -8,7 +8,12 @@ return {
         require("overseer").setup({
             actions = {
                 -- Disable built-in actions by setting them to 'false'
+                ["ensure"] = false,
+                ["open"] = false,
                 ["open tab"] = false,
+                ["open hsplit"] = false,
+                ["open vsplit"] = false,
+                ["open output in quickfix"] = false,
             },
 			templates = {
 				"builtin",
