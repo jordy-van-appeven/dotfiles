@@ -14,6 +14,7 @@ apt update && apt install --yes \
     npm \
     python3-venv \
     rsync \
+    scp \
     xclip \
     yarn \
     zip
