@@ -6,9 +6,9 @@ apt update && apt install --yes \
     ca-certificates \
     ccache \
     cmake \
-    curl
-    git
-    gpg
+    curl \
+    git \
+    gpg \
     git \
     nodejs \
     npm \
