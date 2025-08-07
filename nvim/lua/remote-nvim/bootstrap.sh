@@ -40,4 +40,4 @@ export GROUP_NAME=$(getent group "$USER_GID" | cut -d: -f1)
 echo "%$GROUP_NAME ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/$GROUP_NAME
 chmod 0440 /etc/sudoers.d/$GROUP_NAME
 
-chown -R $USER_UID:$USER_GID /workspace
+chown -R $USER_UID:$USER_GID /workspaces
