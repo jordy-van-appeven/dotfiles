@@ -12,9 +12,9 @@ apt update && apt install --yes \
     git \
     nodejs \
     npm \
+    openssh-client \
     python3-venv \
     rsync \
-    scp \
     xclip \
     yarn \
     zip
