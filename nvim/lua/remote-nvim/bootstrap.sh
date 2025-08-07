@@ -32,11 +32,12 @@ groupadd --gid $USER_GID --force $USERNAME \
     && useradd --uid $USER_UID --gid $USER_GID --create-home $USERNAME --non-unique
 
 # [Optional] Add sudo support. Omit if no software should be installed after connecting.
-apt-get update \
+apt update \
     && apt install --yes sudo
 
 export GROUP_NAME=$(getent group "$USER_GID" | cut -d: -f1)
 
 echo "%$GROUP_NAME ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/$GROUP_NAME
-sudo chmod 0440 /etc/sudoers.d/$GROUP_NAME
+chmod 0440 /etc/sudoers.d/$GROUP_NAME
 
+chown -R $USER_UID:USER_GID /workspace
