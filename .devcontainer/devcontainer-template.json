@@ -1,0 +1,29 @@
+{
+  "name": "Devcontainer template",
+  // You can either copy the "devcontainer.json" file and specify the Docker image
+  // by setting the "image" or "build" fields (https://containers.dev/implementors/json_reference/#image-specific),
+  // or provide the image directly using the `devpod up --devcontainer-image` CLI command.
+  "containerEnv": {
+    "DISPLAY": "${localEnv:DISPLAY}"
+  },
+  "mounts": [],
+  "onCreateCommand": "",
+  "remoteUser": "jordy",
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "username": "jordy",
+      "installZsh": false,
+      "installOhMyZsh": false,
+      "installOhMyZshConfig": false
+    },
+    "ghcr.io/devcontainers/features/node:1": {},
+    "ghcr.io/devcontainers/features/python:1": {
+      "version": 3.12
+    },
+    "ghcr.io/devcontainers-community/features/llvm": { "version": 17 },
+    "ghcr.io/devcontainers-extra/features/ripgrep:1": {},
+    "ghcr.io/devcontainers-extra/features/apt-packages:1": {
+      "packages": "curl,xclip"
+    }
+  }
+}
