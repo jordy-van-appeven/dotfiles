@@ -313,7 +313,7 @@ mouse = [
 ]
 
 groups.extend([ScratchPad("terminal", [
-    DropDown("terminal", terminal, x=0.0, y=0.0, width=0.998, height=0.998, opacity=0.95)])])
+    DropDown("terminal", terminal + " -e sh -c 'tmux attach'", x=0.0, y=0.0, width=0.998, height=0.998, opacity=0.95)])])
 
 keys.extend([Key([mod, "control"], "return", lazy.group["terminal"].dropdown_toggle("terminal")),
              ])
