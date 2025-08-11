@@ -60,3 +60,12 @@ vim.filetype.add({
         tpp = "cpp"
     }
 })
+
+-- Better readability of vim diff
+vim.opt.diffopt:append({
+	"iwhite",
+	"internal",
+	"indent-heuristic",
+	"algorithm:patience",
+	"linematch:60",
+})
