@@ -25,7 +25,7 @@ vim.opt.cursorline = true
 vim.opt.termguicolors = true
 vim.opt.background = "dark"
 vim.opt.signcolumn = "yes"
-vim.opt.cmdheight = 0
+vim.opt.cmdheight = 1
 
 -- Global status line
 vim.opt.laststatus = 3
