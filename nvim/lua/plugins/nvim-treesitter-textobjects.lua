@@ -4,7 +4,6 @@ local treesitter_textobjects_config = function()
 
     -- Setup 'treesitter-textobjects'
     require("nvim-treesitter.configs").setup({
-        nvim_next = {
             enable = true,
             textobjects = {
                 select = {
@@ -87,7 +86,6 @@ local treesitter_textobjects_config = function()
                     },
                 },
             },
-        },
     })
 end
 
