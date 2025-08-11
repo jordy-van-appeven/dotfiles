@@ -3,14 +3,10 @@ local mason_tool_installer_config = function()
 
 	mason_tool_installer.setup({
 		ensure_installed = {
-			-- Formatters
 			"autopep8",
-			{ "isort", version = "5.10.1" },
+			"isort",
 			"prettier",
-			"stylua",
-			-- Linters
-			{ "pylint", version = "3.0.0a4" },
-			{ "yamllint", version = "1.28.0" },
+			{ "stylua", version = "v2.0.2" },
 		},
 	})
 end

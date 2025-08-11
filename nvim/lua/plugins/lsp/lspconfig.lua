@@ -38,12 +38,19 @@ local config_function = function()
         -- Diagnostics
         local next_diagnostic = require("nvim-next.integrations").diagnostic()
 
-        vim.keymap.set("n", "[d",
+		vim.keymap.set(
+			"n",
+			"[d",
             next_diagnostic.goto_prev({ severity = { min = vim.diagnostic.severity.HINT } }),
-            { desc = "previous diagnostic" })
+			{ desc = "previous diagnostic" }
+		)
 
-        vim.keymap.set("n", "]d", next_diagnostic.goto_next({ severity = { min = vim.diagnostic.severity.HINT } }),
-            { desc = "next diagnostic" })
+		vim.keymap.set(
+			"n",
+			"]d",
+			next_diagnostic.goto_next({ severity = { min = vim.diagnostic.severity.HINT } }),
+			{ desc = "next diagnostic" }
+		)
 
         opts.desc = "See available code actions"
         vim.keymap.set({ "n", "v" }, "<leader>ga", vim.lsp.buf.code_action, opts)
@@ -67,12 +74,12 @@ local config_function = function()
     -- Diagnostics
     vim.diagnostic.config({
         float = {
-            border = 'rounded',
-            source = 'always',
+			border = "rounded",
+			source = "always",
         },
         severity_sort = true,
         signs = true,
-        underline = false,
+		underline = true,
         update_in_insert = true,
         virtual_text = false,
     })
@@ -82,25 +89,20 @@ local config_function = function()
         vim.fn.sign_define(opts.name, {
             texthl = opts.name,
             text = opts.text,
-            numhl = ''
+			numhl = "",
         })
     end
 
-    sign({ name = 'DiagnosticSignError', text = " " })
-    sign({ name = 'DiagnosticSignWarn', text = " " })
-    sign({ name = 'DiagnosticSignHint', text = "󰠠 " })
-    sign({ name = 'DiagnosticSignInfo', text = " " })
+	sign({ name = "DiagnosticSignError", text = " " })
+	sign({ name = "DiagnosticSignWarn", text = " " })
+	sign({ name = "DiagnosticSignHint", text = "󰠠 " })
+	sign({ name = "DiagnosticSignInfo", text = " " })
 
     -- Set borders
-    vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
-        vim.lsp.handlers.hover,
-        { border = 'rounded' }
-    )
+	vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
 
-    vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(
-        vim.lsp.handlers.signature_help,
-        { border = 'rounded' }
-    )
+	vim.lsp.handlers["textDocument/signatureHelp"] =
+		vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
 
     -- Used to enable autocompletion (assign to every lsp server config)
     local cmp_nvim_lsp = require("cmp_nvim_lsp")
@@ -174,17 +176,16 @@ local config_function = function()
         },
     })
 
-    lspconfig["pyright"].setup({
+	lspconfig["basedpyright"].setup({
         capabilities = capabilities,
         on_attach = on_attach,
         settings = {
-            python = {
+			basedpyright = {
                 analysis = {
-                    diagnosticSeverityOverrides = {
-                        reportGeneralTypeIssues = "warning",
-                    }
-                }
-            }
+					reportPrivateUsage = false,
+					typeCheckingMode = "basic", -- "basic", "strict", or "off"
+				},
+			},
         },
     })
 
