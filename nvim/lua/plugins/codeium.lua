@@ -8,10 +8,12 @@ return {
         config = function()
             require("codeium").setup({})
         end,
+        enabled = false,
         event = "BufEnter",
     },
     {
         "Exafunction/codeium.vim",
+        enabled = false,
         event = "BufEnter",
     },
 }
