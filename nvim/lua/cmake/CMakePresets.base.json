@@ -1,0 +1,50 @@
+{
+  "version": 3,
+  "configurePresets": [
+    {
+      "name": "base",
+      "environment": {
+        "CCACHE_PREFIX": ""
+      },
+      "hidden": true,
+      "cacheVariables": {
+        "CMAKE_C_COMPILER": "/usr/bin/gcc",
+        "CMAKE_CXX_COMPILER": "/usr/bin/g++",
+        "CMAKE_CXX_COMPILER_LAUNCHER": "ccache",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": true,
+        "CMAKE_POLICY_VERSION_MINIMUM": "3.5",
+        "BUILD_SHARED_LIBS": "OFF"
+      }
+    },
+    {
+      "name": "release",
+      "binaryDir": "${sourceDir}/build-${presetName}",
+      "inherits": "base",
+      "environment": {},
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      }
+    },
+    {
+      "name": "debug",
+      "binaryDir": "${sourceDir}/build-${presetName}",
+      "inherits": "base",
+      "environment": {},
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "release",
+      "configurePreset": "release",
+      "jobs": 12
+    },
+    {
+      "name": "debug",
+      "configurePreset": "debug",
+      "jobs": 12
+    }
+  ]
+}

@@ -73,13 +73,15 @@ local cmake_tools_config = function()
         },
     }
     -- Keymaps
-    vim.keymap.set("n", "<M-;>", "<cmd>CMakeSelectConfigurePreset<CR>")
-    vim.keymap.set("n", "<M-4>", "<cmd>CMakeSelectBuildPreset<CR>")
+    vim.keymap.set("n", "<M-!>", ":CMakeGenerate")
+    vim.keymap.set("n", "<M-4>", "<cmd>CMakeSelectConfigurePreset<CR>")
+    vim.keymap.set("n", "<M-$>", "<cmd>CMakeSelectBuildPreset<CR>")
     vim.keymap.set("n", "<M-5>", "<cmd>CMakeSelectBuildTarget<CR>")
-    vim.keymap.set("n", "<M-6>", "<cmd>CMakeBuild<CR>")
-    vim.keymap.set("n", "<M-[>", "<cmd>CMakeSelectLaunchTarget<CR>")
-    vim.keymap.set("n", "<M-7>", "<cmd>CMakeLaunchArgs<CR>")
-    vim.keymap.set("n", "<M-8>", "<cmd>CMakeRun<CR>")
+    vim.keymap.set("n", "<M-%>", "<cmd>CMakeBuild<CR>")
+    vim.keymap.set("n", "<M-6>", "<cmd>CMakeSelectLaunchTarget<CR>")
+    vim.keymap.set("n", "<M-^>", "<cmd>CMakeRun<CR>")
+    vim.keymap.set("n", "<M-7>", ":CMakeLaunchArgs ")
+    vim.keymap.set("n", "<M-8>", "<cmd>CMakeDebug<CR>")
 end
 
 return {
